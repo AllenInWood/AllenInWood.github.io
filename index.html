@@ -118,6 +118,12 @@
 
 
   <title> AllenInWood's Blog </title>
+
+<script type="text/javascript">
+    var host = "alleninwood.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -175,17 +181,29 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-project">
+          <a href="/categories/project" rel="section">
+            
+            project
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            essay
           </a>
         </li>
       
         
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             Categories
           </a>
@@ -195,8 +213,6 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
             About
           </a>
         </li>
@@ -204,8 +220,6 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -215,8 +229,6 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
             Tags
           </a>
         </li>
@@ -224,8 +236,6 @@
         
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
@@ -482,17 +492,13 @@
 
       
         
-          
-            <p><strong>完全树的结点数n = 2^h - 1</strong><br><strong>亦有 结点数n = 2*底层结点数 - 1</strong><br><strong>注：底层结点数x = 2^(h - 1)</strong></p>
-<h2 id="堆中i结点的子树大小至多为2n-3的证明"><a href="#堆中i结点的子树大小至多为2n-3的证明" class="headerlink" title="堆中i结点的子树大小至多为2n/3的证明"></a>堆中i结点的子树大小至多为2n/3的证明</h2><h3 id="问题：在任一含n个元素的堆中，至多有ceiling-n-2-h-1-个高度为h的节点。"><a href="#问题：在任一含n个元素的堆中，至多有ceiling-n-2-h-1-个高度为h的节点。" class="headerlink" title="问题：在任一含n个元素的堆中，至多有ceiling(n/(2^(h+1)))个高度为h的节点。"></a>问题：在任一含n个元素的堆中，至多有ceiling(n/(2^(h+1)))个高度为h的节点。</h3><p>证明：</p>
-<p>当堆是满二叉树时：<br>最底层的元素个数为ceiling(n/2)个，这层高度为0；<br>倒数第二层元素个数为ceiling(n/4)个，高度为1；<br>倒数第三层元素个数为ceiling(n/8)个，高度为2；<br>如此类推，高度为h的，在倒数第h + 1层，元素个数为ceiling(n / 2^(h + 1))。</p>
-<p>若堆不是满二叉树，这个数目则总少于ceiling(n / 2^(h + 1))了。</p>
-<h3 id="问题：一棵以节点i为根的、大小为n的子树上，i节点的子树大小至多为2n-3（最坏情况：底层恰好半满的时候），怎么证明？"><a href="#问题：一棵以节点i为根的、大小为n的子树上，i节点的子树大小至多为2n-3（最坏情况：底层恰好半满的时候），怎么证明？" class="headerlink" title="问题：一棵以节点i为根的、大小为n的子树上，i节点的子树大小至多为2n/3（最坏情况：底层恰好半满的时候），怎么证明？"></a>问题：一棵以节点i为根的、大小为n的子树上，i节点的子树大小至多为2n/3（最坏情况：底层恰好半满的时候），怎么证明？</h3><p>证明：</p>
-<p>这里应该是讨论完全二叉树，规定总size为n，要求根的左子树的最大size。（由于右子树size总是&lt;=左子树size）。</p>
-<p>那么显然，观察最底层节点数目为0, 1, 2…的情况，显然半满的时候左子树达到了最大。以下求此时左子树的大小：</p>
-<p>设底层半满时节点数为x，则再加x个节点，就是满树：n + x = 2x * 2 - 1 = 满树size<br>可得n = 3x - 1。<br>满树时，左子树节点数 = (满树size - 1) / 2 = 2x -1 ~= 2n / 3</p>
-
-          
+          <p><strong>完全树的结点数n = 2^h - 1</strong><br><strong>亦有 结点数n = 2*底层结点数 - 1</strong><br><strong>注：底层结点数x = 2^(h - 1)</strong></p>
+<h2 id="堆中i结点的子树大小至多为2n-3的证明"><a href="#堆中i结点的子树大小至多为2n-3的证明" class="headerlink" title="堆中i结点的子树大小至多为2n/3的证明"></a>堆中i结点的子树大小至多为2n/3的证明</h2><h3 id="问题：在任一含n个元素的堆中，至多有ceiling-n-2-h-1-个高度为h的节点。"><a href="#问题：在任一含n个元素的堆中，至多有ceiling-n-2-h-1-个高度为h的节点。" class="headerlink" title="问题：在任一含n个元素的堆中，至多有ceiling(n/(2^(h+1)))个高度为h的节点。"></a>问题：在任一含n个元素的堆中，至多有ceiling(n/(2^(h+1)))个高度为h的节点。</h3>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/08/堆中i结点的子树大小至多为2n-3的证明/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -768,76 +774,12 @@
 
       
         
-          
-            <pre><code class="bash">import java.util.*;  
-import java.io.*;  
-import javax.servlet.http.*;  
-import javax.servlet.*;  
-
-import com.bjpowernode.exam.model.*;  
-import com.bjpowernode.exam.manager.*;  
-
-public class SearchStudentServlet extends HttpServlet {  
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)   
-    throws ServletException, IOException {  
-        doPost(request, response);  
-    }  
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)  
-    throws ServletException, IOException {  
-
-        String sBeginDate = request.getParameter(<span class="string">"beginDate"</span>);  
-        String sEndDate = request.getParameter(<span class="string">"endDate"</span>);  
-
-        Date beginDate = new Date();  
-        Date endDate = new Date();  
-        try {  
-            beginDate = new SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).parse(sBeginDate);  
-            endDate = new SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).parse(sEndDate);  
-         }catch(Exception e) {  
-            e.printStackTrace();           
-         }     
-
-        StudentManager studentManager = new StudentManagerImpl();  
-        List&lt;Student&gt; studentList = studentManager.findStudentList(beginDate, endDate);  
-
-        //将学生列表设置到requet范围中  
-        //request.setAttribute(<span class="string">"student_list"</span>, studentList);  
-
-        //转发,转发是在服务器端转发的，客户端是不知道的  
-        //request.getRequestDispatcher(<span class="string">"/student_list.jsp"</span>).forward(request, response);  
-
-
-        //将studentList放到session中  
-        HttpSession session = request.getSession();  
-        session.setAttribute(<span class="string">"student_list"</span>, studentList);  
-
-        //重定向，不会共享request  
-        //以下写法错误,该 <span class="string">"/"</span>代表了8080端口  
-        //response.sendRedirect(<span class="string">"/student_list.jsp"</span>);  
-        response.sendRedirect(request.getContextPath() + <span class="string">"/student_list.jsp"</span>);  
-    }  
-}
-</code></pre>
-<h2 id="这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："><a href="#这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：" class="headerlink" title="这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："></a>这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：</h2><h3 id="实现转发"><a href="#实现转发" class="headerlink" title="实现转发:"></a>实现转发:</h3><pre><code class="bash">&lt;span style=<span class="string">"font-family:FangSong_GB2312;font-size:18px;"</span>&gt;//转发,转发是在服务器端转发的，客户端是不知道的  
-request.getRequestDispatcher(<span class="string">"/student_list.jsp"</span>).forward(request, response);&lt;/span&gt;
-</code></pre>
-<p>分析：请求转发是服务器内部把对一个request/response的处理权，移交给另外一个对于客户端而言，它只知道自己最早请求的那个A，而不知道中间的B，甚至C、D。 <strong>传输的信息不会丢失。</strong></p>
-<h3 id="实现重定向："><a href="#实现重定向：" class="headerlink" title="实现重定向："></a>实现重定向：</h3><pre><code class="bash">&lt;span style=<span class="string">"font-family:FangSong_GB2312;font-size:18px;"</span>&gt;//重定向，不会共享request  
-//以下写法错误,该 <span class="string">"/"</span>代表了8080端口  
-response.sendRedirect(<span class="string">"/student_list.jsp"</span>);  
-response.sendRedirect(request.getContextPath() + <span class="string">"/student_list.jsp"</span>);&lt;/span&gt;
-</code></pre>
-<h2 id="深入（分析理解）"><a href="#深入（分析理解）" class="headerlink" title="深入（分析理解）"></a>深入（分析理解）</h2><h3 id="转发过程"><a href="#转发过程" class="headerlink" title="转发过程"></a>转发过程</h3><p> 客户首先发送一个请求到服务器端，服务器端发现匹配的servlet，并指定它去执行，当这个servlet执行完之后，它要调用getRequestDispacther()方法，把请求转发给指定的student_list.jsp,整个流程都是在服务器端完成的，而且是在同一个请求里面完成的，因此servlet和jsp共享的是同一个request，在servlet里面放的所有东西，在student_list中都能取出来，因此，student_list能把结果getAttribute()出来，getAttribute()出来后执行完把结果返回给客户端。整个过程是一个请求，一个响应。</p>
-<h3 id="重定向过程"><a href="#重定向过程" class="headerlink" title="重定向过程"></a>重定向过程</h3><p>客户发送一个请求到服务器，服务器匹配servlet，这都和请求转发一样，servlet处理完之后调用了sendRedirect()这个方法，这个方法是response的方法，所以，当这个servlet处理完之后，看到response.senRedirect()方法，立即向客户端返回这个响应，响应行告诉客户端你必须要再发送一个请求，去访问student_list.jsp，紧接着客户端受到这个请求后，立刻发出一个新的请求，去请求student_list.jsp,这里两个请求互不干扰，相互独立，在前面request里面setAttribute()的任何东西，在后面的request里面都获得不了。可见，在sendRedirect()里面是两个请求，两个响应。</p>
-<h2 id="浅出（表象）"><a href="#浅出（表象）" class="headerlink" title="浅出（表象）"></a>浅出（表象）</h2><h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>当用RequestDispatcher请求转发后，地址栏为<a href="http://localhost:8080/test/TestServlet" target="_blank" rel="external">http://localhost:8080/test/TestServlet</a><br>这真好应正了上面的分析，我们起初请求的就一个servlet，至于你服务器端怎么转，流程怎么样的，我客户端根本就不知道，我发了请求后我就等着响应，那你服务器那边愿意怎么转就怎么转，我客户端不关心也没法知道，所以当服务器端转发到jsp后，它把结果返回给客户端，客户端根本就不知道你这个结果是我真正访问的servlet产生的，还是由servlet转发后下一个组件产生的。</p>
-<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>当用sendRedirect重定向后，地址栏为<a href="http://localhost:8080/test/student_list.jsp" target="_blank" rel="external">http://localhost:8080/test/student_list.jsp</a><br>因为这个时候，客户端已经知道了他第二次请求的是student_list.jsp，服务器已经告诉客户端要去访问student_list.jsp了，所以地址栏里会显示想要访问的结果。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>转发在服务器端完成的；重定向是在客户端完成的<br>转发的速度快；重定向速度慢<br>转发的是同一次请求；重定向是两次不同请求<br>转发不会执行转发后的代码；重定向会执行重定向之后的代码<br>转发地址栏没有变化；重定向地址栏有变化<br>转发必须是在同一台服务器下完成；重定向可以在不同的服务器下完成</p>
-<p><strong>Forward是在服务器端的跳转，就是客户端一个请求发给服务器，服务器直接将请求相关的参数的信息原封不动的传递到该服务器的其他jsp或servlet去处理，而sendredirect是在客户端的跳转，服务器会返回给客户端一个响应报头和新的URL地址，原来的参数什么的信息如果服务器端没有特别处理就不存在了，浏览器会访问新的URL所指向的servlet或jsp，这可能不是原先服务器上的webservce了。</strong></p>
-<p>More info: <a href="http://blog.csdn.net/lishehe/article/details/23133105" target="_blank" rel="external">Source link</a></p>
-
-          
+          <p>今天来说一下redirection与forward在Jsp中的一些细微差别<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/10/Difference-between-redirection-and-forward-in-Java/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -967,21 +909,12 @@ response.sendRedirect(request.getContextPath() + <span class="string">"/student_
 
       
         
-          
-            <p>对于 HashSet 而言，它是基于 HashMap 实现的，HashSet 底层采用 HashMap 来保存所有元素，因此 HashSet 的实现比较简单<br>查看 HashSet 的源代码，可以看到如下代码： </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">public class HashSet&lt;E&gt;   </span><br><span class="line"> extends AbstractSet&lt;E&gt;   </span><br><span class="line"> implements Set&lt;E&gt;, Cloneable, java.io.Serializable   </span><br><span class="line">&#123;   </span><br><span class="line"> // 使用 HashMap 的 key 保存 HashSet 中所有元素  </span><br><span class="line"> private transient HashMap&lt;E,Object&gt; map;   </span><br><span class="line"> // 定义一个虚拟的 Object 对象作为 HashMap 的 value   </span><br><span class="line"> private static final Object PRESENT = new Object();   </span><br><span class="line"> ...   </span><br><span class="line"> // 初始化 HashSet，底层会初始化一个 HashMap   </span><br><span class="line"> public HashSet()   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new HashMap&lt;E,Object&gt;();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 以指定的 initialCapacity、loadFactor 创建 HashSet   </span><br><span class="line"> // 其实就是以相应的参数创建 HashMap   </span><br><span class="line"> public HashSet(int initialCapacity, <span class="built_in">float</span> loadFactor)   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new HashMap&lt;E,Object&gt;(initialCapacity, loadFactor);   </span><br><span class="line"> &#125;   </span><br><span class="line"> public HashSet(int initialCapacity)   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new HashMap&lt;E,Object&gt;(initialCapacity);   </span><br><span class="line"> &#125;   </span><br><span class="line"> HashSet(int initialCapacity, <span class="built_in">float</span> loadFactor, boolean dummy)   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new LinkedHashMap&lt;E,Object&gt;(initialCapacity   </span><br><span class="line">         , loadFactor);   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 map 的 keySet 来返回所有的 key   </span><br><span class="line"> public Iterator&lt;E&gt; iterator()   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.keySet().iterator();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 size() 方法返回 Entry 的数量，就得到该 Set 里元素的个数  </span><br><span class="line"> public int size()   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.size();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 isEmpty() 判断该 HashSet 是否为空，  </span><br><span class="line"> // 当 HashMap 为空时，对应的 HashSet 也为空  </span><br><span class="line"> public boolean isEmpty()   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.isEmpty();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 containsKey 判断是否包含指定 key   </span><br><span class="line"> //HashSet 的所有元素就是通过 HashMap 的 key 来保存的  </span><br><span class="line"> public boolean contains(Object o)   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.containsKey(o);   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 将指定元素放入 HashSet 中，也就是将该元素作为 key 放入 HashMap   </span><br><span class="line"> public boolean add(E e)   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.put(e, PRESENT) == null;   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 remove 方法删除指定 Entry，也就删除了 HashSet 中对应的元素  </span><br><span class="line"> public boolean remove(Object o)   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.remove(o)==PRESENT;   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 Map 的 clear 方法清空所有 Entry，也就清空了 HashSet 中所有元素  </span><br><span class="line"> public void clear()   </span><br><span class="line"> &#123;   </span><br><span class="line">     map.clear();   </span><br><span class="line"> &#125;   </span><br><span class="line"> ...   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由上面源程序可以看出，HashSet 的实现其实非常简单，它只是封装了一个 HashMap 对象来存储所有的集合元素，所有放入 HashSet 中的集合元素实际上由 HashMap 的 key 来保存，而 HashMap 的 value 则存储了一个 PRESENT，它是一个静态的 Object 对象。 </p>
-<p>HashSet 的绝大部分方法都是通过调用 HashMap 的方法来实现的，因此 HashSet 和 HashMap 两个集合在实现本质上是相同的。<br>掌握上面理论知识之后，接下来看一个示例程序，测试一下自己是否真正掌握了 HashMap 和 HashSet 集合的功能。 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> class Name  </span><br><span class="line">&#123;  </span><br><span class="line">    private String first;   </span><br><span class="line">    private String last;   </span><br><span class="line">      </span><br><span class="line">    public Name(String first, String last)   </span><br><span class="line">    &#123;   </span><br><span class="line">        this.first = first;   </span><br><span class="line">        this.last = last;   </span><br><span class="line">    &#125;   </span><br><span class="line">  </span><br><span class="line">    public boolean equals(Object o)   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="keyword">if</span> (this == o)   </span><br><span class="line">        &#123;   </span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;   </span><br><span class="line">        &#125;   </span><br><span class="line">          </span><br><span class="line">    <span class="keyword">if</span> (o.getClass() == Name.class)   </span><br><span class="line">        &#123;   </span><br><span class="line">            Name n = (Name)o;   </span><br><span class="line">            <span class="built_in">return</span> n.first.equals(first)   </span><br><span class="line">                &amp;&amp; n.last.equals(last);   </span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">public class HashSetTest  </span><br><span class="line">&#123;  </span><br><span class="line">    public static void main(String[] args)  </span><br><span class="line">    &#123;   </span><br><span class="line">        Set&lt;Name&gt; s = new HashSet&lt;Name&gt;();  </span><br><span class="line">        s.add(new Name(<span class="string">"abc"</span>, <span class="string">"123"</span>));  </span><br><span class="line">        System.out.println(  </span><br><span class="line">            s.contains(new Name(<span class="string">"abc"</span>, <span class="string">"123"</span>)));  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面程序中向 HashSet 里添加了一个 new Name(“abc”, “123”) 对象之后，立即通过程序判断该 HashSet 是否包含一个 new Name(“abc”, “123”) 对象。粗看上去，很容易以为该程序会输出 true。 </p>
-<p>实际运行上面程序将看到程序输出 false，这是因为 HashSet 判断两个对象相等的标准除了要求通过 equals() 方法比较返回 true 之外，还要求两个对象的 hashCode() 返回值相等。而上面程序没有重写 Name 类的 hashCode() 方法，两个 Name 对象的 hashCode() 返回值并不相同，因此 HashSet 会把它们当成 2 个对象处理，因此程序返回 false。 </p>
-<p>由此可见，当我们试图把某个类的对象当成 HashMap 的 key，或试图将这个类的对象放入 HashSet 中保存时，重写该类的 equals(Object obj) 方法和 hashCode() 方法很重要，而且这两个方法的返回值必须保持一致：当该类的两个的 hashCode() 返回值相同时，它们通过 equals() 方法比较也应该返回 true。通常来说，所有参与计算 hashCode() 返回值的关键属性，都应该用于作为 equals() 比较的标准。<br>如下程序就正确重写了 Name 类的 hashCode() 和 equals() 方法，程序如下： </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Name   </span><br><span class="line">&#123;   </span><br><span class="line">    private String first;  </span><br><span class="line">    private String last;  </span><br><span class="line">    public Name(String first, String last)  </span><br><span class="line">    &#123;   </span><br><span class="line">        this.first = first;   </span><br><span class="line">        this.last = last;   </span><br><span class="line">    &#125;   </span><br><span class="line">    // 根据 first 判断两个 Name 是否相等  </span><br><span class="line">    public boolean equals(Object o)   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="keyword">if</span> (this == o)   </span><br><span class="line">        &#123;   </span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;   </span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">if</span> (o.getClass() == Name.class)   </span><br><span class="line">        &#123;   </span><br><span class="line">            Name n = (Name)o;   </span><br><span class="line">            <span class="built_in">return</span> n.first.equals(first);   </span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line">       </span><br><span class="line">    // 根据 first 计算 Name 对象的 hashCode() 返回值  </span><br><span class="line">    public int hashCode()   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="built_in">return</span> first.hashCode();   </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    public String toString()   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="built_in">return</span> <span class="string">"Name[first="</span> + first + <span class="string">", last="</span> + last + <span class="string">"]"</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line"> &#125;   </span><br><span class="line">   </span><br><span class="line"> public class HashSetTest2   </span><br><span class="line"> &#123;   </span><br><span class="line">    public static void main(String[] args)   </span><br><span class="line">    &#123;   </span><br><span class="line">        HashSet&lt;Name&gt; <span class="built_in">set</span> = new HashSet&lt;Name&gt;();   </span><br><span class="line">        set.add(new Name(<span class="string">"abc"</span> , <span class="string">"123"</span>));   </span><br><span class="line">        set.add(new Name(<span class="string">"abc"</span> , <span class="string">"456"</span>));   </span><br><span class="line">        System.out.println(<span class="built_in">set</span>);   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面程序中提供了一个 Name 类，该 Name 类重写了 equals() 和 toString() 两个方法，这两个方法都是根据 Name 类的 first 实例变量来判断的，当两个 Name 对象的 first 实例变量相等时，这两个 Name 对象的 hashCode() 返回值也相同，通过 equals() 比较也会返回 true。 </p>
-<p>程序主方法先将第一个 Name 对象添加到 HashSet 中，该 Name 对象的 first 实例变量值为”abc”，接着程序再次试图将一个 first 为”abc”的 Name 对象添加到 HashSet 中，很明显，此时没法将新的 Name 对象添加到该 HashSet 中，因为此处试图添加的 Name 对象的 first 也是” abc”，HashSet 会判断此处新增的 Name 对象与原有的 Name 对象相同，因此无法添加进入，程序在①号代码处输出 set 集合时将看到该集合里只包含一个 Name 对象，就是第一个、last 为”123”的 Name 对象。</p>
-<p>More info: <a href="http://alex09.iteye.com/blog/539549" target="_blank" rel="external">Source link</a></p>
-
-          
+          <p>对于 HashSet 而言，它是基于 HashMap 实现的，HashSet 底层采用 HashMap 来保存所有元素，因此 HashSet 的实现比较简单<br>查看 HashSet 的源代码，可以看到如下代码：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/09/HashSet-s-detail-info-java/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1049,7 +982,7 @@ response.sendRedirect(request.getContextPath() + <span class="string">"/student_
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://img.xiumi.us/xmi/ua/l9Qv/i/c30a6da59be90bc8b24ee76a052db722-sz_88590.jpg@1l_640w.jpg"
+               src="/images/avatar.jpeg"
                alt="AllenInWood" />
           <p class="site-author-name" itemprop="name">AllenInWood</p>
           <p class="site-description motion-element" itemprop="description">imagination</p>
@@ -1382,5 +1315,7 @@ response.sendRedirect(request.getContextPath() + <span class="string">"/student_
   
 
 
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
 </body>
 </html>

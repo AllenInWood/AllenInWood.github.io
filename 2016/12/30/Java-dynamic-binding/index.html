@@ -94,7 +94,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hi.csdn.net/attachment/201005/9/0_1273390910MR3c.gif">
 <meta property="og:image" content="http://hi.csdn.net/attachment/201005/9/0_1273394418UgmV.gif">
-<meta property="og:updated_time" content="2016-12-30T09:19:34.000Z">
+<meta property="og:updated_time" content="2017-11-09T23:42:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java dynamic binding">
 <meta name="twitter:description" content="1、Java动态绑定的内部实现机制JAVA虚拟机调用一个类方法时，它会基于对象引用的类型(通常在编译时可知)来选择所调用的方法。相反，当虚拟机调用一个实例方法时，它会基于对象实际的类型(只能在运行时得知)来选择所调用的方法，这就是动态绑定，是多态的一种。动态绑定为解决实际的业务问题提供了很大的灵活性，是一种非常优美的机制。 JAVA对象模型JAVA虚拟机规范并没有规定JAVA对象在堆里是如何表示的">
@@ -123,6 +123,12 @@
 
 
   <title> Java dynamic binding | AllenInWood's Blog </title>
+
+<script type="text/javascript">
+    var host = "alleninwood.github.io";
+    if ((host == window.location.host) && (window.location.protocol != "https:"))
+        window.location.protocol = "https";
+</script>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="en">
@@ -178,17 +184,29 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-project">
+          <a href="/categories/project" rel="section">
+            
+            project
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            essay
           </a>
         </li>
       
         
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             Categories
           </a>
@@ -198,8 +216,6 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
             About
           </a>
         </li>
@@ -207,8 +223,6 @@
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -218,8 +232,6 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
             Tags
           </a>
         </li>
@@ -227,8 +239,6 @@
         
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
             公益404
           </a>
@@ -352,7 +362,7 @@
 <p>JAVA对象中包含的基本数据由它所属的类及其所有超类声明的实例变量组成。只要有一个对象引用，虚拟机就必须能够快速地定位对象实例的数据。另外，它也必须能通过该对象引用访问相应的类数据(存储于方法区的类型信息)，因此在对象中通常会有一个指向方法区的指针。当程序在运行时需要转换某个对象引用为另外一种类型时，虚拟机必须要检查这种转换是否被允许，被转换的对象是否的确是被引用的对象或者它的超类型。当程序在执行instanceof操作时，虚拟机也进行了同样的检查。所以虚拟机都需要查看被引用的对象的类数据。</p>
 <p>不管虚拟机的实现使用什么样的对象表示法，很可能每个对象都有一个方法表因为方法表加快了调用实例方法时的效率。但是JAVA虚拟机规范并未要求必须使用方法表，所以并不是所有实现中都会使用它。</p>
 <p>下面是一种JAVA对象的内存表示(JAVA对象内存模型)：<br><img src="http://hi.csdn.net/attachment/201005/9/0_1273390910MR3c.gif" alt="JAVA对象内存模型"></p>
-<p>方法数据存放在类的方法区中，包含一个方法的具体实现的字节码二进制。方法指针直接指向这个方法在内存中的起始位置，通过方法指针就可以找到这个方法。</p>
+<p>方法数据存放在类的方法区中，包含一个方法的具体实现的字节码二进制。方法指针直接指向这个方法在内存中的起始位置，通过方法指针就可以找到这个方法。<br><a id="more"></a></p>
 <h2 id="2、动态绑定内部机制"><a href="#2、动态绑定内部机制" class="headerlink" title="2、动态绑定内部机制"></a><strong>2、动态绑定内部机制</strong></h2><p>方法表是一个指向方法区中的方法指针的数组。方法表中不包含static、private等静态绑定的方法，仅仅包含那些需要动态绑定的实例方法。</p>
 <p>在方法表中，来自超类的方法出现在来自子类的方法之前，并且排列方法指针的顺序和方法在class文件中出现的顺序相同，这种排列顺序的例外情况是，被子类的方法覆盖的方法出现在超类中该方法第一次出现的地方。</p>
 <p>例如有超类Base和子类Derive：</p>
@@ -496,7 +506,7 @@
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://img.xiumi.us/xmi/ua/l9Qv/i/c30a6da59be90bc8b24ee76a052db722-sz_88590.jpg@1l_640w.jpg"
+               src="/images/avatar.jpeg"
                alt="AllenInWood" />
           <p class="site-author-name" itemprop="name">AllenInWood</p>
           <p class="site-description motion-element" itemprop="description">imagination</p>
@@ -844,5 +854,7 @@
   
 
 
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
 </body>
 </html>
