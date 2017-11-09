@@ -1,0 +1,833 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1、Java动态绑定的内部实现机制JAVA虚拟机调用一个类方法时，它会基于对象引用的类型(通常在编译时可知)来选择所调用的方法。相反，当虚拟机调用一个实例方法时，它会基于对象实际的类型(只能在运行时得知)来选择所调用的方法，这就是动态绑定，是多态的一种。动态绑定为解决实际的业务问题提供了很大的灵活性，是一种非常优美的机制。 JAVA对象模型JAVA虚拟机规范并没有规定JAVA对象在堆里是如何表示的">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java dynamic binding">
+<meta property="og:url" content="http://alleninwood.github.io/2016/12/30/Java-dynamic-binding/index.html">
+<meta property="og:site_name" content="AllenInWood&#39;s Blog">
+<meta property="og:description" content="1、Java动态绑定的内部实现机制JAVA虚拟机调用一个类方法时，它会基于对象引用的类型(通常在编译时可知)来选择所调用的方法。相反，当虚拟机调用一个实例方法时，它会基于对象实际的类型(只能在运行时得知)来选择所调用的方法，这就是动态绑定，是多态的一种。动态绑定为解决实际的业务问题提供了很大的灵活性，是一种非常优美的机制。 JAVA对象模型JAVA虚拟机规范并没有规定JAVA对象在堆里是如何表示的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201005/9/0_1273390910MR3c.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201005/9/0_1273394418UgmV.gif">
+<meta property="og:updated_time" content="2016-12-30T09:19:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java dynamic binding">
+<meta name="twitter:description" content="1、Java动态绑定的内部实现机制JAVA虚拟机调用一个类方法时，它会基于对象引用的类型(通常在编译时可知)来选择所调用的方法。相反，当虚拟机调用一个实例方法时，它会基于对象实际的类型(只能在运行时得知)来选择所调用的方法，这就是动态绑定，是多态的一种。动态绑定为解决实际的业务问题提供了很大的灵活性，是一种非常优美的机制。 JAVA对象模型JAVA虚拟机规范并没有规定JAVA对象在堆里是如何表示的">
+<meta name="twitter:image" content="http://hi.csdn.net/attachment/201005/9/0_1273390910MR3c.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'allen'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://alleninwood.github.io/2016/12/30/Java-dynamic-binding/"/>
+
+
+  <title> Java dynamic binding | AllenInWood's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">AllenInWood's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">WritingAndCoding</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java dynamic binding
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-30T16:03:24-08:00" content="2016-12-30">
+              2016-12-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/30/Java-dynamic-binding/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/Java-dynamic-binding/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/30/Java-dynamic-binding/" class="leancloud_visitors" data-flag-title="Java dynamic binding">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1、Java动态绑定的内部实现机制"><a href="#1、Java动态绑定的内部实现机制" class="headerlink" title="1、Java动态绑定的内部实现机制"></a><strong>1、Java动态绑定的内部实现机制</strong></h2><p>JAVA虚拟机调用一个类方法时，它会基于对象引用的类型(通常在编译时可知)来选择所调用的方法。相反，当虚拟机调用一个实例方法时，它会基于对象实际的类型(只能在运行时得知)来选择所调用的方法，这就是动态绑定，是多态的一种。动态绑定为解决实际的业务问题提供了很大的灵活性，是一种非常优美的机制。</p>
+<h3 id="JAVA对象模型"><a href="#JAVA对象模型" class="headerlink" title="JAVA对象模型"></a><strong>JAVA对象模型</strong></h3><p>JAVA虚拟机规范并没有规定JAVA对象在堆里是如何表示的。对象的内部表示也影响着整个堆以及垃圾收集器的设计，它由虚拟机的实现者决定。</p>
+<p>JAVA对象中包含的基本数据由它所属的类及其所有超类声明的实例变量组成。只要有一个对象引用，虚拟机就必须能够快速地定位对象实例的数据。另外，它也必须能通过该对象引用访问相应的类数据(存储于方法区的类型信息)，因此在对象中通常会有一个指向方法区的指针。当程序在运行时需要转换某个对象引用为另外一种类型时，虚拟机必须要检查这种转换是否被允许，被转换的对象是否的确是被引用的对象或者它的超类型。当程序在执行instanceof操作时，虚拟机也进行了同样的检查。所以虚拟机都需要查看被引用的对象的类数据。</p>
+<p>不管虚拟机的实现使用什么样的对象表示法，很可能每个对象都有一个方法表因为方法表加快了调用实例方法时的效率。但是JAVA虚拟机规范并未要求必须使用方法表，所以并不是所有实现中都会使用它。</p>
+<p>下面是一种JAVA对象的内存表示(JAVA对象内存模型)：<br><img src="http://hi.csdn.net/attachment/201005/9/0_1273390910MR3c.gif" alt="JAVA对象内存模型"></p>
+<p>方法数据存放在类的方法区中，包含一个方法的具体实现的字节码二进制。方法指针直接指向这个方法在内存中的起始位置，通过方法指针就可以找到这个方法。</p>
+<h2 id="2、动态绑定内部机制"><a href="#2、动态绑定内部机制" class="headerlink" title="2、动态绑定内部机制"></a><strong>2、动态绑定内部机制</strong></h2><p>方法表是一个指向方法区中的方法指针的数组。方法表中不包含static、private等静态绑定的方法，仅仅包含那些需要动态绑定的实例方法。</p>
+<p>在方法表中，来自超类的方法出现在来自子类的方法之前，并且排列方法指针的顺序和方法在class文件中出现的顺序相同，这种排列顺序的例外情况是，被子类的方法覆盖的方法出现在超类中该方法第一次出现的地方。</p>
+<p>例如有超类Base和子类Derive：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Base   </span><br><span class="line">&#123;  </span><br><span class="line">  public Base()  </span><br><span class="line">  &#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">	 </span><br><span class="line">  public void <span class="built_in">test</span>()  </span><br><span class="line">  &#123;  </span><br><span class="line">	System.out.println( <span class="string">"int Base"</span> );  </span><br><span class="line">  &#125;  </span><br><span class="line">	</span><br><span class="line">  public void <span class="built_in">print</span>()  </span><br><span class="line">  &#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">public class Derive extends Base  </span><br><span class="line">&#123;  </span><br><span class="line">  public Derive()  </span><br><span class="line">  &#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  public void <span class="built_in">test</span>()  </span><br><span class="line">  &#123;  </span><br><span class="line">	System.out.println( <span class="string">"int Derive"</span> );  </span><br><span class="line">  &#125;  </span><br><span class="line">	</span><br><span class="line">  public void sayHello()  </span><br><span class="line">  &#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">	</span><br><span class="line">  public static void main( String[] args )  </span><br><span class="line">  &#123;  </span><br><span class="line">	  Base base = new Derive();  </span><br><span class="line">	  base.test();  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上例中的Base和Derive的方法表如下：</p>
+<p><img src="http://hi.csdn.net/attachment/201005/9/0_1273394418UgmV.gif" alt=""></p>
+<p>在这个例子里，test()方法在Base和Derive的方法表中都是同一个位置-位置1。在Base方法表中，test()指针是Base的test()方法内存地址；而在Derive方法表中，方法表的位置1放置的是Derive的test()方法内存地址。</p>
+<p>当JAVA虚拟机执行base.test()时，通过base引用可以找到base所指向的实际对象的内存位置，现在虚拟机不知道base引用的实际对象是Base还是Derive。但是根据上面的对象内存模型，虚拟机从对象内存中的第一个指针“特殊结构指针”开始，可以找到实际对象的类型数据和Class实例，这样虚拟机就可以知道base引用的实际对象是Derive对。为了执行test()，虚拟机需要找到test()的字节码，方法的字节码存放在方法区中。虚拟机从对象内存中的第一个指针“特殊结构指针”开始，搜寻方法表的位置1，位置1指向的test()方法是Derive类的test()方法，这就是JAVA虚拟机将要执行的test()的字节码。现在，虚拟机知道了调用的实际对象是Derive对象，调用的实际test()方法是Derive类的test()方法，所以JAVA虚拟机能够正确执行-调用base引用的实际对象的方法而不是base引用本身的方法。</p>
+<p>这是动态绑定的一种实现方式，根据不同的JAVA虚拟机平台和不同的实际约束，动态绑定可以有不同的内部实现机制。</p>
+<p>More info: <a href="blog.csdn.net/sureyonder/article/details/5569617">Source link</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://img.xiumi.us/xmi/ua/l9Qv/i/abbc8821f6e413abb52d3d96567fd5c9-sz_40075.jpg@1l_640w.jpg" alt="AllenInWood wechat" style="width: 200px; max-width: 100%;"/>
+    <div>Allen's微信公众号 疏理</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+	
+	<! -- 添加微信图标 -->
+    
+	
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/30/实例方法和类方法区别/" rel="next" title="实例方法和类方法区别">
+                <i class="fa fa-chevron-left"></i> 实例方法和类方法区别
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/09/HashSet-s-detail-info-java/" rel="prev" title="HashSet's detail info/java">
+                HashSet's detail info/java <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/30/Java-dynamic-binding/"
+     data-title="Java dynamic binding"
+     data-content=""
+     data-url="http://alleninwood.github.io/2016/12/30/Java-dynamic-binding/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/30/Java-dynamic-binding/"
+           data-title="Java dynamic binding" data-url="http://alleninwood.github.io/2016/12/30/Java-dynamic-binding/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img.xiumi.us/xmi/ua/l9Qv/i/c30a6da59be90bc8b24ee76a052db722-sz_88590.jpg@1l_640w.jpg"
+               alt="AllenInWood" />
+          <p class="site-author-name" itemprop="name">AllenInWood</p>
+          <p class="site-description motion-element" itemprop="description">imagination</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Java动态绑定的内部实现机制"><span class="nav-number">1.</span> <span class="nav-text">1、Java动态绑定的内部实现机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA对象模型"><span class="nav-number">1.1.</span> <span class="nav-text">JAVA对象模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、动态绑定内部机制"><span class="nav-number">2.</span> <span class="nav-text">2、动态绑定内部机制</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AllenInWood</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"allen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("taRPfUJXO6Ld4XeGjf60G0wp-gzGzoHsz", "oySnMAkmFcePJbTXBvIXuEde");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

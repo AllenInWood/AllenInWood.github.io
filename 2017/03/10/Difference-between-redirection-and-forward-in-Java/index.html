@@ -1,0 +1,883 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,HashSet," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="import java.util.*;   import java.io.*;   import javax.servlet.http.*;   import javax.servlet.*;    import com.bjpowernode.exam.model.*;   import com.bjpowernode.exam.manager.*;    public class Search">
+<meta name="keywords" content="java,HashSet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Difference between redirection and forward in Java">
+<meta property="og:url" content="http://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/index.html">
+<meta property="og:site_name" content="AllenInWood&#39;s Blog">
+<meta property="og:description" content="import java.util.*;   import java.io.*;   import javax.servlet.http.*;   import javax.servlet.*;    import com.bjpowernode.exam.model.*;   import com.bjpowernode.exam.manager.*;    public class Search">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-03-10T08:56:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Difference between redirection and forward in Java">
+<meta name="twitter:description" content="import java.util.*;   import java.io.*;   import javax.servlet.http.*;   import javax.servlet.*;    import com.bjpowernode.exam.model.*;   import com.bjpowernode.exam.manager.*;    public class Search">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'allen'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/"/>
+
+
+  <title> Difference between redirection and forward in Java | AllenInWood's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">AllenInWood's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">WritingAndCoding</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Difference between redirection and forward in Java
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-10T16:42:08-08:00" content="2017-03-10">
+              2017-03-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/10/Difference-between-redirection-and-forward-in-Java/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/10/Difference-between-redirection-and-forward-in-Java/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/10/Difference-between-redirection-and-forward-in-Java/" class="leancloud_visitors" data-flag-title="Difference between redirection and forward in Java">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <pre><code class="bash">import java.util.*;  
+import java.io.*;  
+import javax.servlet.http.*;  
+import javax.servlet.*;  
+
+import com.bjpowernode.exam.model.*;  
+import com.bjpowernode.exam.manager.*;  
+
+public class SearchStudentServlet extends HttpServlet {  
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)   
+    throws ServletException, IOException {  
+        doPost(request, response);  
+    }  
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response)  
+    throws ServletException, IOException {  
+
+        String sBeginDate = request.getParameter(<span class="string">"beginDate"</span>);  
+        String sEndDate = request.getParameter(<span class="string">"endDate"</span>);  
+
+        Date beginDate = new Date();  
+        Date endDate = new Date();  
+        try {  
+            beginDate = new SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).parse(sBeginDate);  
+            endDate = new SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).parse(sEndDate);  
+         }catch(Exception e) {  
+            e.printStackTrace();           
+         }     
+
+        StudentManager studentManager = new StudentManagerImpl();  
+        List&lt;Student&gt; studentList = studentManager.findStudentList(beginDate, endDate);  
+
+        //将学生列表设置到requet范围中  
+        //request.setAttribute(<span class="string">"student_list"</span>, studentList);  
+
+        //转发,转发是在服务器端转发的，客户端是不知道的  
+        //request.getRequestDispatcher(<span class="string">"/student_list.jsp"</span>).forward(request, response);  
+
+
+        //将studentList放到session中  
+        HttpSession session = request.getSession();  
+        session.setAttribute(<span class="string">"student_list"</span>, studentList);  
+
+        //重定向，不会共享request  
+        //以下写法错误,该 <span class="string">"/"</span>代表了8080端口  
+        //response.sendRedirect(<span class="string">"/student_list.jsp"</span>);  
+        response.sendRedirect(request.getContextPath() + <span class="string">"/student_list.jsp"</span>);  
+    }  
+}
+</code></pre>
+<h2 id="这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："><a href="#这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：" class="headerlink" title="这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："></a>这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：</h2><h3 id="实现转发"><a href="#实现转发" class="headerlink" title="实现转发:"></a>实现转发:</h3><pre><code class="bash">&lt;span style=<span class="string">"font-family:FangSong_GB2312;font-size:18px;"</span>&gt;//转发,转发是在服务器端转发的，客户端是不知道的  
+request.getRequestDispatcher(<span class="string">"/student_list.jsp"</span>).forward(request, response);&lt;/span&gt;
+</code></pre>
+<p>分析：请求转发是服务器内部把对一个request/response的处理权，移交给另外一个对于客户端而言，它只知道自己最早请求的那个A，而不知道中间的B，甚至C、D。 <strong>传输的信息不会丢失。</strong></p>
+<h3 id="实现重定向："><a href="#实现重定向：" class="headerlink" title="实现重定向："></a>实现重定向：</h3><pre><code class="bash">&lt;span style=<span class="string">"font-family:FangSong_GB2312;font-size:18px;"</span>&gt;//重定向，不会共享request  
+//以下写法错误,该 <span class="string">"/"</span>代表了8080端口  
+response.sendRedirect(<span class="string">"/student_list.jsp"</span>);  
+response.sendRedirect(request.getContextPath() + <span class="string">"/student_list.jsp"</span>);&lt;/span&gt;
+</code></pre>
+<h2 id="深入（分析理解）"><a href="#深入（分析理解）" class="headerlink" title="深入（分析理解）"></a>深入（分析理解）</h2><h3 id="转发过程"><a href="#转发过程" class="headerlink" title="转发过程"></a>转发过程</h3><p> 客户首先发送一个请求到服务器端，服务器端发现匹配的servlet，并指定它去执行，当这个servlet执行完之后，它要调用getRequestDispacther()方法，把请求转发给指定的student_list.jsp,整个流程都是在服务器端完成的，而且是在同一个请求里面完成的，因此servlet和jsp共享的是同一个request，在servlet里面放的所有东西，在student_list中都能取出来，因此，student_list能把结果getAttribute()出来，getAttribute()出来后执行完把结果返回给客户端。整个过程是一个请求，一个响应。</p>
+<h3 id="重定向过程"><a href="#重定向过程" class="headerlink" title="重定向过程"></a>重定向过程</h3><p>客户发送一个请求到服务器，服务器匹配servlet，这都和请求转发一样，servlet处理完之后调用了sendRedirect()这个方法，这个方法是response的方法，所以，当这个servlet处理完之后，看到response.senRedirect()方法，立即向客户端返回这个响应，响应行告诉客户端你必须要再发送一个请求，去访问student_list.jsp，紧接着客户端受到这个请求后，立刻发出一个新的请求，去请求student_list.jsp,这里两个请求互不干扰，相互独立，在前面request里面setAttribute()的任何东西，在后面的request里面都获得不了。可见，在sendRedirect()里面是两个请求，两个响应。</p>
+<h2 id="浅出（表象）"><a href="#浅出（表象）" class="headerlink" title="浅出（表象）"></a>浅出（表象）</h2><h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>当用RequestDispatcher请求转发后，地址栏为<a href="http://localhost:8080/test/TestServlet" target="_blank" rel="external">http://localhost:8080/test/TestServlet</a><br>这真好应正了上面的分析，我们起初请求的就一个servlet，至于你服务器端怎么转，流程怎么样的，我客户端根本就不知道，我发了请求后我就等着响应，那你服务器那边愿意怎么转就怎么转，我客户端不关心也没法知道，所以当服务器端转发到jsp后，它把结果返回给客户端，客户端根本就不知道你这个结果是我真正访问的servlet产生的，还是由servlet转发后下一个组件产生的。</p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>当用sendRedirect重定向后，地址栏为<a href="http://localhost:8080/test/student_list.jsp" target="_blank" rel="external">http://localhost:8080/test/student_list.jsp</a><br>因为这个时候，客户端已经知道了他第二次请求的是student_list.jsp，服务器已经告诉客户端要去访问student_list.jsp了，所以地址栏里会显示想要访问的结果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>转发在服务器端完成的；重定向是在客户端完成的<br>转发的速度快；重定向速度慢<br>转发的是同一次请求；重定向是两次不同请求<br>转发不会执行转发后的代码；重定向会执行重定向之后的代码<br>转发地址栏没有变化；重定向地址栏有变化<br>转发必须是在同一台服务器下完成；重定向可以在不同的服务器下完成</p>
+<p><strong>Forward是在服务器端的跳转，就是客户端一个请求发给服务器，服务器直接将请求相关的参数的信息原封不动的传递到该服务器的其他jsp或servlet去处理，而sendredirect是在客户端的跳转，服务器会返回给客户端一个响应报头和新的URL地址，原来的参数什么的信息如果服务器端没有特别处理就不存在了，浏览器会访问新的URL所指向的servlet或jsp，这可能不是原先服务器上的webservce了。</strong></p>
+<p>More info: <a href="http://blog.csdn.net/lishehe/article/details/23133105" target="_blank" rel="external">Source link</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://img.xiumi.us/xmi/ua/l9Qv/i/abbc8821f6e413abb52d3d96567fd5c9-sz_40075.jpg@1l_640w.jpg" alt="AllenInWood wechat" style="width: 200px; max-width: 100%;"/>
+    <div>Allen's微信公众号 疏理</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+	
+	<! -- 添加微信图标 -->
+    
+	
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/HashSet/" rel="tag">#HashSet</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/09/HashSet-s-detail-info-java/" rel="next" title="HashSet's detail info/java">
+                <i class="fa fa-chevron-left"></i> HashSet's detail info/java
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/18/The-difference-between-applicationContext-xml-in-Spring-and-xxx-servlet-xml-in-SpringMVC/" rel="prev" title="The difference between applicationContext.xml in Spring and xxx-servlet.xml in SpringMVC">
+                The difference between applicationContext.xml in Spring and xxx-servlet.xml in SpringMVC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/03/10/Difference-between-redirection-and-forward-in-Java/"
+     data-title="Difference between redirection and forward in Java"
+     data-content=""
+     data-url="http://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/10/Difference-between-redirection-and-forward-in-Java/"
+           data-title="Difference between redirection and forward in Java" data-url="http://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img.xiumi.us/xmi/ua/l9Qv/i/c30a6da59be90bc8b24ee76a052db722-sz_88590.jpg@1l_640w.jpg"
+               alt="AllenInWood" />
+          <p class="site-author-name" itemprop="name">AllenInWood</p>
+          <p class="site-description motion-element" itemprop="description">imagination</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："><span class="nav-number">1.</span> <span class="nav-text">这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现转发"><span class="nav-number">1.1.</span> <span class="nav-text">实现转发:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现重定向："><span class="nav-number">1.2.</span> <span class="nav-text">实现重定向：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入（分析理解）"><span class="nav-number">2.</span> <span class="nav-text">深入（分析理解）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转发过程"><span class="nav-number">2.1.</span> <span class="nav-text">转发过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向过程"><span class="nav-number">2.2.</span> <span class="nav-text">重定向过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅出（表象）"><span class="nav-number">3.</span> <span class="nav-text">浅出（表象）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转发"><span class="nav-number">3.1.</span> <span class="nav-text">转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">3.2.</span> <span class="nav-text">重定向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AllenInWood</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"allen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("taRPfUJXO6Ld4XeGjf60G0wp-gzGzoHsz", "oySnMAkmFcePJbTXBvIXuEde");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
