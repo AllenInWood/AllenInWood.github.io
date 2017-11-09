@@ -266,150 +266,6 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/09/HashSet-s-detail-info-java/" itemprop="url">
-                  HashSet's detail info/java
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-09T10:22:08-08:00" content="2017-03-09">
-              2017-03-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/09/HashSet-s-detail-info-java/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/09/HashSet-s-detail-info-java/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/03/09/HashSet-s-detail-info-java/" class="leancloud_visitors" data-flag-title="HashSet's detail info/java">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>对于 HashSet 而言，它是基于 HashMap 实现的，HashSet 底层采用 HashMap 来保存所有元素，因此 HashSet 的实现比较简单<br>查看 HashSet 的源代码，可以看到如下代码： </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">public class HashSet&lt;E&gt;   </span><br><span class="line"> extends AbstractSet&lt;E&gt;   </span><br><span class="line"> implements Set&lt;E&gt;, Cloneable, java.io.Serializable   </span><br><span class="line">&#123;   </span><br><span class="line"> // 使用 HashMap 的 key 保存 HashSet 中所有元素  </span><br><span class="line"> private transient HashMap&lt;E,Object&gt; map;   </span><br><span class="line"> // 定义一个虚拟的 Object 对象作为 HashMap 的 value   </span><br><span class="line"> private static final Object PRESENT = new Object();   </span><br><span class="line"> ...   </span><br><span class="line"> // 初始化 HashSet，底层会初始化一个 HashMap   </span><br><span class="line"> public HashSet()   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new HashMap&lt;E,Object&gt;();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 以指定的 initialCapacity、loadFactor 创建 HashSet   </span><br><span class="line"> // 其实就是以相应的参数创建 HashMap   </span><br><span class="line"> public HashSet(int initialCapacity, <span class="built_in">float</span> loadFactor)   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new HashMap&lt;E,Object&gt;(initialCapacity, loadFactor);   </span><br><span class="line"> &#125;   </span><br><span class="line"> public HashSet(int initialCapacity)   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new HashMap&lt;E,Object&gt;(initialCapacity);   </span><br><span class="line"> &#125;   </span><br><span class="line"> HashSet(int initialCapacity, <span class="built_in">float</span> loadFactor, boolean dummy)   </span><br><span class="line"> &#123;   </span><br><span class="line">     map = new LinkedHashMap&lt;E,Object&gt;(initialCapacity   </span><br><span class="line">         , loadFactor);   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 map 的 keySet 来返回所有的 key   </span><br><span class="line"> public Iterator&lt;E&gt; iterator()   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.keySet().iterator();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 size() 方法返回 Entry 的数量，就得到该 Set 里元素的个数  </span><br><span class="line"> public int size()   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.size();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 isEmpty() 判断该 HashSet 是否为空，  </span><br><span class="line"> // 当 HashMap 为空时，对应的 HashSet 也为空  </span><br><span class="line"> public boolean isEmpty()   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.isEmpty();   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 containsKey 判断是否包含指定 key   </span><br><span class="line"> //HashSet 的所有元素就是通过 HashMap 的 key 来保存的  </span><br><span class="line"> public boolean contains(Object o)   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.containsKey(o);   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 将指定元素放入 HashSet 中，也就是将该元素作为 key 放入 HashMap   </span><br><span class="line"> public boolean add(E e)   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.put(e, PRESENT) == null;   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 HashMap 的 remove 方法删除指定 Entry，也就删除了 HashSet 中对应的元素  </span><br><span class="line"> public boolean remove(Object o)   </span><br><span class="line"> &#123;   </span><br><span class="line">     <span class="built_in">return</span> map.remove(o)==PRESENT;   </span><br><span class="line"> &#125;   </span><br><span class="line"> // 调用 Map 的 clear 方法清空所有 Entry，也就清空了 HashSet 中所有元素  </span><br><span class="line"> public void clear()   </span><br><span class="line"> &#123;   </span><br><span class="line">     map.clear();   </span><br><span class="line"> &#125;   </span><br><span class="line"> ...   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由上面源程序可以看出，HashSet 的实现其实非常简单，它只是封装了一个 HashMap 对象来存储所有的集合元素，所有放入 HashSet 中的集合元素实际上由 HashMap 的 key 来保存，而 HashMap 的 value 则存储了一个 PRESENT，它是一个静态的 Object 对象。 </p>
-<p>HashSet 的绝大部分方法都是通过调用 HashMap 的方法来实现的，因此 HashSet 和 HashMap 两个集合在实现本质上是相同的。<br>掌握上面理论知识之后，接下来看一个示例程序，测试一下自己是否真正掌握了 HashMap 和 HashSet 集合的功能。 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> class Name  </span><br><span class="line">&#123;  </span><br><span class="line">    private String first;   </span><br><span class="line">    private String last;   </span><br><span class="line">      </span><br><span class="line">    public Name(String first, String last)   </span><br><span class="line">    &#123;   </span><br><span class="line">        this.first = first;   </span><br><span class="line">        this.last = last;   </span><br><span class="line">    &#125;   </span><br><span class="line">  </span><br><span class="line">    public boolean equals(Object o)   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="keyword">if</span> (this == o)   </span><br><span class="line">        &#123;   </span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;   </span><br><span class="line">        &#125;   </span><br><span class="line">          </span><br><span class="line">    <span class="keyword">if</span> (o.getClass() == Name.class)   </span><br><span class="line">        &#123;   </span><br><span class="line">            Name n = (Name)o;   </span><br><span class="line">            <span class="built_in">return</span> n.first.equals(first)   </span><br><span class="line">                &amp;&amp; n.last.equals(last);   </span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">public class HashSetTest  </span><br><span class="line">&#123;  </span><br><span class="line">    public static void main(String[] args)  </span><br><span class="line">    &#123;   </span><br><span class="line">        Set&lt;Name&gt; s = new HashSet&lt;Name&gt;();  </span><br><span class="line">        s.add(new Name(<span class="string">"abc"</span>, <span class="string">"123"</span>));  </span><br><span class="line">        System.out.println(  </span><br><span class="line">            s.contains(new Name(<span class="string">"abc"</span>, <span class="string">"123"</span>)));  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面程序中向 HashSet 里添加了一个 new Name(“abc”, “123”) 对象之后，立即通过程序判断该 HashSet 是否包含一个 new Name(“abc”, “123”) 对象。粗看上去，很容易以为该程序会输出 true。 </p>
-<p>实际运行上面程序将看到程序输出 false，这是因为 HashSet 判断两个对象相等的标准除了要求通过 equals() 方法比较返回 true 之外，还要求两个对象的 hashCode() 返回值相等。而上面程序没有重写 Name 类的 hashCode() 方法，两个 Name 对象的 hashCode() 返回值并不相同，因此 HashSet 会把它们当成 2 个对象处理，因此程序返回 false。 </p>
-<p>由此可见，当我们试图把某个类的对象当成 HashMap 的 key，或试图将这个类的对象放入 HashSet 中保存时，重写该类的 equals(Object obj) 方法和 hashCode() 方法很重要，而且这两个方法的返回值必须保持一致：当该类的两个的 hashCode() 返回值相同时，它们通过 equals() 方法比较也应该返回 true。通常来说，所有参与计算 hashCode() 返回值的关键属性，都应该用于作为 equals() 比较的标准。<br>如下程序就正确重写了 Name 类的 hashCode() 和 equals() 方法，程序如下： </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Name   </span><br><span class="line">&#123;   </span><br><span class="line">    private String first;  </span><br><span class="line">    private String last;  </span><br><span class="line">    public Name(String first, String last)  </span><br><span class="line">    &#123;   </span><br><span class="line">        this.first = first;   </span><br><span class="line">        this.last = last;   </span><br><span class="line">    &#125;   </span><br><span class="line">    // 根据 first 判断两个 Name 是否相等  </span><br><span class="line">    public boolean equals(Object o)   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="keyword">if</span> (this == o)   </span><br><span class="line">        &#123;   </span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;   </span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">if</span> (o.getClass() == Name.class)   </span><br><span class="line">        &#123;   </span><br><span class="line">            Name n = (Name)o;   </span><br><span class="line">            <span class="built_in">return</span> n.first.equals(first);   </span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line">       </span><br><span class="line">    // 根据 first 计算 Name 对象的 hashCode() 返回值  </span><br><span class="line">    public int hashCode()   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="built_in">return</span> first.hashCode();   </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    public String toString()   </span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="built_in">return</span> <span class="string">"Name[first="</span> + first + <span class="string">", last="</span> + last + <span class="string">"]"</span>;   </span><br><span class="line">    &#125;   </span><br><span class="line"> &#125;   </span><br><span class="line">   </span><br><span class="line"> public class HashSetTest2   </span><br><span class="line"> &#123;   </span><br><span class="line">    public static void main(String[] args)   </span><br><span class="line">    &#123;   </span><br><span class="line">        HashSet&lt;Name&gt; <span class="built_in">set</span> = new HashSet&lt;Name&gt;();   </span><br><span class="line">        set.add(new Name(<span class="string">"abc"</span> , <span class="string">"123"</span>));   </span><br><span class="line">        set.add(new Name(<span class="string">"abc"</span> , <span class="string">"456"</span>));   </span><br><span class="line">        System.out.println(<span class="built_in">set</span>);   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面程序中提供了一个 Name 类，该 Name 类重写了 equals() 和 toString() 两个方法，这两个方法都是根据 Name 类的 first 实例变量来判断的，当两个 Name 对象的 first 实例变量相等时，这两个 Name 对象的 hashCode() 返回值也相同，通过 equals() 比较也会返回 true。 </p>
-<p>程序主方法先将第一个 Name 对象添加到 HashSet 中，该 Name 对象的 first 实例变量值为”abc”，接着程序再次试图将一个 first 为”abc”的 Name 对象添加到 HashSet 中，很明显，此时没法将新的 Name 对象添加到该 HashSet 中，因为此处试图添加的 Name 对象的 first 也是” abc”，HashSet 会判断此处新增的 Name 对象与原有的 Name 对象相同，因此无法添加进入，程序在①号代码处输出 set 集合时将看到该集合里只包含一个 Name 对象，就是第一个、last 为”123”的 Name 对象。</p>
-<p>More info: <a href="http://alex09.iteye.com/blog/539549" target="_blank" rel="external">Source link</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/12/30/Java-dynamic-binding/" itemprop="url">
                   Java dynamic binding
                 </a>
@@ -966,6 +822,172 @@ public void say(){
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/15/nltk-UnicodeDecoderError/" itemprop="url">
+                  nltk UnicodeDecoderError
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-15T20:48:39-08:00" content="2016-11-15">
+              2016-11-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/15/nltk-UnicodeDecoderError/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/15/nltk-UnicodeDecoderError/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/15/nltk-UnicodeDecoderError/" class="leancloud_visitors" data-flag-title="nltk UnicodeDecoderError">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>Python version:</strong> 2.7<br><strong>Windows version:</strong> Windows 7 64-bit<br><strong>Language of the system:</strong> Chinese<br>After downloading the nltk package, here comes a problem when importing.<br>Here is my code:</p>
+<pre><code>&gt;&gt;&gt;import nltk
+</code></pre><p>However, I get the following error:</p>
+<pre><code>Traceback (most recent call last):
+  File &quot;C:\Users\Александр\Desktop\TextBlob.py&quot;, line 1, in &lt;module&gt;
+    import textblob
+  File &quot;C:\Python27\lib\site-packages\textblob\__init__.py&quot;, line 9, in &lt;module&gt;
+   from .blob import TextBlob, Word, Sentence, Blobber, WordList
+   File &quot;C:\Python27\lib\site-packages\textblob\blob.py&quot;, line 28, in &lt;module&gt;
+    import nltk
+  File &quot;C:\Python27\lib\site-packages\nltk\__init__.py&quot;, line 128, in &lt;module&gt;
+    from nltk.chunk import *
+  File &quot;C:\Python27\lib\site-packages\nltk\chunk\__init__.py&quot;, line 155, in &lt;module&gt;
+   from nltk.data import load
+  File &quot;C:\Python27\lib\site-packages\nltk\data.py&quot;, line 77, in &lt;module&gt;
+    if &apos;APPENGINE_RUNTIME&apos; not in os.environ and os.path.expanduser(&apos;~/&apos;) != &apos;~/&apos;:
+  File &quot;C:\Python27\lib\ntpath.py&quot;, line 311, in expanduser
+    return userhome + path[i:]
+UnicodeDecodeError: &apos;ascii&apos; codec can&apos;t decode byte 0xc0 in position 9: ordinal not in range(128)
+&gt;&gt;&gt;
+</code></pre><p>Just as illustrated above, the problem is related to language coding problems of <em>ntpath.py</em><br>From Google and Stackoverflow, a solution works fine.<br>I inserted following part into <em>ntpath.py</em>:</p>
+<pre><code>reload(sys)
+sys.setdefaultencoding(&apos;Cp1252&apos;)
+</code></pre><p>And the code in this file has been changed to:</p>
+<pre><code>import os
+import sys
+import stat
+import genericpath
+import warnings
+
+#change
+reload(sys)
+sys.setdefaultencoding(&apos;Cp1252&apos;)
+</code></pre><p>Finally, it works well.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+	
+	<! -- 添加微信图标 -->
+    
+	
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1019,7 +1041,7 @@ public void say(){
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
