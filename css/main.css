@@ -1564,7 +1564,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8c826a;
+  background: #b900ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2719,4 +2719,24 @@ body {
 .post-body p a:hover {
   color: #0477ab;
   text-decoration: underline;
+}
+.img-logo {
+  max-width: 180px;
+  max-height: 96px;
+  display: block;
+  margin-right: 0.7em;
+  margin-left: 0.7em;
+  padding: 0;
+  float: right;
+  clear: right;
+}
+.img-topic {
+  max-width: 300px;
+  max-height: 1800px;
+  display: block;
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+  padding: 0;
+  float: right;
+  clear: right;
 }
