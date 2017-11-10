@@ -1564,7 +1564,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b900ff;
+  background: #00ff85;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2730,6 +2730,16 @@ body {
   float: right;
   clear: right;
 }
+.img-mid {
+  max-width: 200px;
+  max-height: 1000px;
+  display: block;
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+  padding: 0;
+  float: right;
+  clear: right;
+}
 .img-topic {
   max-width: 300px;
   max-height: 1800px;
@@ -2739,4 +2749,60 @@ body {
   padding: 0;
   float: right;
   clear: right;
+}
+.img-center {
+  max-width: 200px;
+  max-height: 1000px;
+  display: block;
+  margin: auto;
+}
+.img-shadow {
+  box-shadow: 0 0 2px 3px #ddd;
+}
+.leisure {
+  width: 100%;
+  min-height: 130px;
+  margin: 20px 0;
+  display: block;
+  clear: both;
+  width: 600px;
+  height: 350px;
+  margin-top: 0px;
+}
+.leisure img {
+  width: 128px;
+  height: 128px;
+  float: left;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #dedede;
+  margin: -5px 10px 5px 0;
+}
+.leisure .intro {
+  margin: -8px 10px 5px 0;
+  width: 100%;
+}
+.leisure .intro ul {
+  list-style: none;
+  margin-left: 0;
+  margin-top: -40px;
+  min-height: 188px;
+}
+.leisure .intro ul li {
+  line-height: 20px;
+  margin: 10px 0;
+}
+.leisure .intro ul li:first-child {
+  font-size: 20px;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  border-bottom: 1px #eee solid;
+}
+.leisure .intro ul li:before {
+  content: none;
+}
+hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
