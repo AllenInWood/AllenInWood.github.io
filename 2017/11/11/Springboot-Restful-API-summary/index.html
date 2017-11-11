@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,HashSet," />
+  <meta name="keywords" content="java,springboot,restful," />
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="今天来说一下redirection与forward在Jsp中的一些细微差别">
-<meta name="keywords" content="java,HashSet">
+<meta name="description" content="Request type URL Function     GET /users get list of users   POST /users create a user   GET /users/id find user by id   PUT /users/id update user by id   DELETE /users/id delete user by id">
+<meta name="keywords" content="java,springboot,restful">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Difference between redirection and forward in Java">
-<meta property="og:url" content="https://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/index.html">
+<meta property="og:title" content="Springboot Restful API summary">
+<meta property="og:url" content="https://alleninwood.github.io/2017/11/11/Springboot-Restful-API-summary/index.html">
 <meta property="og:site_name" content="AllenInWood&#39;s Blog">
-<meta property="og:description" content="今天来说一下redirection与forward在Jsp中的一些细微差别">
+<meta property="og:description" content="Request type URL Function     GET /users get list of users   POST /users create a user   GET /users/id find user by id   PUT /users/id update user by id   DELETE /users/id delete user by id">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-09T23:35:34.000Z">
+<meta property="og:updated_time" content="2017-11-11T17:11:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Difference between redirection and forward in Java">
-<meta name="twitter:description" content="今天来说一下redirection与forward在Jsp中的一些细微差别">
+<meta name="twitter:title" content="Springboot Restful API summary">
+<meta name="twitter:description" content="Request type URL Function     GET /users get list of users   POST /users create a user   GET /users/id find user by id   PUT /users/id update user by id   DELETE /users/id delete user by id">
 
 
 
@@ -116,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="https://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/"/>
+  <link rel="canonical" href="https://alleninwood.github.io/2017/11/11/Springboot-Restful-API-summary/"/>
 
 
-  <title> Difference between redirection and forward in Java | AllenInWood's Blog </title>
+  <title> Springboot Restful API summary | AllenInWood's Blog </title>
 </head>
 <script type="text/javascript">
     var host = "https://alleninwood.github.io/";
@@ -270,7 +270,7 @@
             
             
               
-                Difference between redirection and forward in Java
+                Springboot Restful API summary
               
             
           </h1>
@@ -282,8 +282,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-03-10T16:42:08-08:00" content="2017-03-10">
-              2017-03-10
+            <time itemprop="dateCreated" datetime="2017-11-11T09:06:19-08:00" content="2017-11-11">
+              2017-11-11
             </time>
           </span>
 
@@ -312,8 +312,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/03/10/Difference-between-redirection-and-forward-in-Java/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/" itemprop="commentsCount">0</span> comments
+                <a href="/2017/11/11/Springboot-Restful-API-summary/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/11/11/Springboot-Restful-API-summary/" itemprop="commentsCount">0</span> comments
                 </a>
               </span>
             
@@ -323,7 +323,7 @@
 
           
           
-             <span id="/2017/03/10/Difference-between-redirection-and-forward-in-Java/" class="leancloud_visitors" data-flag-title="Difference between redirection and forward in Java">
+             <span id="/2017/11/11/Springboot-Restful-API-summary/" class="leancloud_visitors" data-flag-title="Springboot Restful API summary">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -345,74 +345,42 @@
       
 
       
-        <p>今天来说一下redirection与forward在Jsp中的一些细微差别<br><a id="more"></a></p>
-<pre><code class="bash">import java.util.*;  
-import java.io.*;  
-import javax.servlet.http.*;  
-import javax.servlet.*;  
-
-import com.bjpowernode.exam.model.*;  
-import com.bjpowernode.exam.manager.*;  
-
-public class SearchStudentServlet extends HttpServlet {  
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response)   
-    throws ServletException, IOException {  
-        doPost(request, response);  
-    }  
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)  
-    throws ServletException, IOException {  
-
-        String sBeginDate = request.getParameter(<span class="string">"beginDate"</span>);  
-        String sEndDate = request.getParameter(<span class="string">"endDate"</span>);  
-
-        Date beginDate = new Date();  
-        Date endDate = new Date();  
-        try {  
-            beginDate = new SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).parse(sBeginDate);  
-            endDate = new SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).parse(sEndDate);  
-         }catch(Exception e) {  
-            e.printStackTrace();           
-         }     
-
-        StudentManager studentManager = new StudentManagerImpl();  
-        List&lt;Student&gt; studentList = studentManager.findStudentList(beginDate, endDate);  
-
-        //将学生列表设置到requet范围中  
-        //request.setAttribute(<span class="string">"student_list"</span>, studentList);  
-
-        //转发,转发是在服务器端转发的，客户端是不知道的  
-        //request.getRequestDispatcher(<span class="string">"/student_list.jsp"</span>).forward(request, response);  
-
-
-        //将studentList放到session中  
-        HttpSession session = request.getSession();  
-        session.setAttribute(<span class="string">"student_list"</span>, studentList);  
-
-        //重定向，不会共享request  
-        //以下写法错误,该 <span class="string">"/"</span>代表了8080端口  
-        //response.sendRedirect(<span class="string">"/student_list.jsp"</span>);  
-        response.sendRedirect(request.getContextPath() + <span class="string">"/student_list.jsp"</span>);  
-    }  
-}
-</code></pre>
-<h2 id="这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："><a href="#这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：" class="headerlink" title="这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："></a>这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：</h2><h3 id="实现转发"><a href="#实现转发" class="headerlink" title="实现转发:"></a>实现转发:</h3><pre><code class="bash">&lt;span style=<span class="string">"font-family:FangSong_GB2312;font-size:18px;"</span>&gt;//转发,转发是在服务器端转发的，客户端是不知道的  
-request.getRequestDispatcher(<span class="string">"/student_list.jsp"</span>).forward(request, response);&lt;/span&gt;
-</code></pre>
-<p>分析：请求转发是服务器内部把对一个request/response的处理权，移交给另外一个对于客户端而言，它只知道自己最早请求的那个A，而不知道中间的B，甚至C、D。 <strong>传输的信息不会丢失。</strong></p>
-<h3 id="实现重定向："><a href="#实现重定向：" class="headerlink" title="实现重定向："></a>实现重定向：</h3><pre><code class="bash">&lt;span style=<span class="string">"font-family:FangSong_GB2312;font-size:18px;"</span>&gt;//重定向，不会共享request  
-//以下写法错误,该 <span class="string">"/"</span>代表了8080端口  
-response.sendRedirect(<span class="string">"/student_list.jsp"</span>);  
-response.sendRedirect(request.getContextPath() + <span class="string">"/student_list.jsp"</span>);&lt;/span&gt;
-</code></pre>
-<h2 id="深入（分析理解）"><a href="#深入（分析理解）" class="headerlink" title="深入（分析理解）"></a>深入（分析理解）</h2><h3 id="转发过程"><a href="#转发过程" class="headerlink" title="转发过程"></a>转发过程</h3><p> 客户首先发送一个请求到服务器端，服务器端发现匹配的servlet，并指定它去执行，当这个servlet执行完之后，它要调用getRequestDispacther()方法，把请求转发给指定的student_list.jsp,整个流程都是在服务器端完成的，而且是在同一个请求里面完成的，因此servlet和jsp共享的是同一个request，在servlet里面放的所有东西，在student_list中都能取出来，因此，student_list能把结果getAttribute()出来，getAttribute()出来后执行完把结果返回给客户端。整个过程是一个请求，一个响应。</p>
-<h3 id="重定向过程"><a href="#重定向过程" class="headerlink" title="重定向过程"></a>重定向过程</h3><p>客户发送一个请求到服务器，服务器匹配servlet，这都和请求转发一样，servlet处理完之后调用了sendRedirect()这个方法，这个方法是response的方法，所以，当这个servlet处理完之后，看到response.senRedirect()方法，立即向客户端返回这个响应，响应行告诉客户端你必须要再发送一个请求，去访问student_list.jsp，紧接着客户端受到这个请求后，立刻发出一个新的请求，去请求student_list.jsp,这里两个请求互不干扰，相互独立，在前面request里面setAttribute()的任何东西，在后面的request里面都获得不了。可见，在sendRedirect()里面是两个请求，两个响应。</p>
-<h2 id="浅出（表象）"><a href="#浅出（表象）" class="headerlink" title="浅出（表象）"></a>浅出（表象）</h2><h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>当用RequestDispatcher请求转发后，地址栏为<a href="http://localhost:8080/test/TestServlet" target="_blank" rel="external">http://localhost:8080/test/TestServlet</a><br>这真好应正了上面的分析，我们起初请求的就一个servlet，至于你服务器端怎么转，流程怎么样的，我客户端根本就不知道，我发了请求后我就等着响应，那你服务器那边愿意怎么转就怎么转，我客户端不关心也没法知道，所以当服务器端转发到jsp后，它把结果返回给客户端，客户端根本就不知道你这个结果是我真正访问的servlet产生的，还是由servlet转发后下一个组件产生的。</p>
-<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>当用sendRedirect重定向后，地址栏为<a href="http://localhost:8080/test/student_list.jsp" target="_blank" rel="external">http://localhost:8080/test/student_list.jsp</a><br>因为这个时候，客户端已经知道了他第二次请求的是student_list.jsp，服务器已经告诉客户端要去访问student_list.jsp了，所以地址栏里会显示想要访问的结果。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>转发在服务器端完成的；重定向是在客户端完成的<br>转发的速度快；重定向速度慢<br>转发的是同一次请求；重定向是两次不同请求<br>转发不会执行转发后的代码；重定向会执行重定向之后的代码<br>转发地址栏没有变化；重定向地址栏有变化<br>转发必须是在同一台服务器下完成；重定向可以在不同的服务器下完成</p>
-<p><strong>Forward是在服务器端的跳转，就是客户端一个请求发给服务器，服务器直接将请求相关的参数的信息原封不动的传递到该服务器的其他jsp或servlet去处理，而sendredirect是在客户端的跳转，服务器会返回给客户端一个响应报头和新的URL地址，原来的参数什么的信息如果服务器端没有特别处理就不存在了，浏览器会访问新的URL所指向的servlet或jsp，这可能不是原先服务器上的webservce了。</strong></p>
-<p>More info: <a href="http://blog.csdn.net/lishehe/article/details/23133105" target="_blank" rel="external">Source link</a></p>
+        <table>
+<thead>
+<tr>
+<th style="text-align:center">Request type</th>
+<th style="text-align:center">URL</th>
+<th style="text-align:center">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">/users</td>
+<td style="text-align:center">get list of users</td>
+</tr>
+<tr>
+<td style="text-align:center">POST</td>
+<td style="text-align:center">/users</td>
+<td style="text-align:center">create a user</td>
+</tr>
+<tr>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">/users/id</td>
+<td style="text-align:center">find user by id</td>
+</tr>
+<tr>
+<td style="text-align:center">PUT</td>
+<td style="text-align:center">/users/id</td>
+<td style="text-align:center">update user by id</td>
+</tr>
+<tr>
+<td style="text-align:center">DELETE</td>
+<td style="text-align:center">/users/id</td>
+<td style="text-align:center">delete user by id</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -446,7 +414,9 @@ response.sendRedirect(request.getContextPath() + <span class="string">"/student_
           
             <a href="/tags/java/" rel="tag">#java</a>
           
-            <a href="/tags/HashSet/" rel="tag">#HashSet</a>
+            <a href="/tags/springboot/" rel="tag">#springboot</a>
+          
+            <a href="/tags/restful/" rel="tag">#restful</a>
           
         </div>
       
@@ -455,17 +425,13 @@ response.sendRedirect(request.getContextPath() + <span class="string">"/student_
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/09/HashSet-s-detail-info-java/" rel="next" title="HashSet's detail info/java">
-                <i class="fa fa-chevron-left"></i> HashSet's detail info/java
+              <a href="/2017/11/09/mac-update/" rel="next" title="updating comeback">
+                <i class="fa fa-chevron-left"></i> updating comeback
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/18/The-difference-between-applicationContext-xml-in-Spring-and-xxx-servlet-xml-in-SpringMVC/" rel="prev" title="The difference between applicationContext.xml in Spring and xxx-servlet.xml in SpringMVC">
-                The difference between applicationContext.xml in Spring and xxx-servlet.xml in SpringMVC <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -605,7 +571,7 @@ s.setAttribute('data-timestamp', +new Date());
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下："><span class="nav-number">1.</span> <span class="nav-text">这个里面尝试了两种调到后面的Jsp方法，在servlet中调用转发、重定向的语句如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现转发"><span class="nav-number">1.1.</span> <span class="nav-text">实现转发:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现重定向："><span class="nav-number">1.2.</span> <span class="nav-text">实现重定向：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入（分析理解）"><span class="nav-number">2.</span> <span class="nav-text">深入（分析理解）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转发过程"><span class="nav-number">2.1.</span> <span class="nav-text">转发过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向过程"><span class="nav-number">2.2.</span> <span class="nav-text">重定向过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浅出（表象）"><span class="nav-number">3.</span> <span class="nav-text">浅出（表象）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转发"><span class="nav-number">3.1.</span> <span class="nav-text">转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">3.2.</span> <span class="nav-text">重定向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>
@@ -732,9 +698,9 @@ s.setAttribute('data-timestamp', +new Date());
 
     <script type="text/javascript">
       var disqus_shortname = 'allen's blog';
-      var disqus_identifier = '2017/03/10/Difference-between-redirection-and-forward-in-Java/';
-      var disqus_title = "Difference between redirection and forward in Java";
-      var disqus_url = 'https://alleninwood.github.io/2017/03/10/Difference-between-redirection-and-forward-in-Java/';
+      var disqus_identifier = '2017/11/11/Springboot-Restful-API-summary/';
+      var disqus_title = "Springboot Restful API summary";
+      var disqus_url = 'https://alleninwood.github.io/2017/11/11/Springboot-Restful-API-summary/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
