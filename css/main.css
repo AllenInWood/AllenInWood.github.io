@@ -1564,7 +1564,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0e7040;
+  background: #1fcc4a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2762,11 +2762,8 @@ body {
 .leisure {
   width: 100%;
   min-height: 130px;
-  margin: 20px 0;
   display: block;
   clear: both;
-  width: 600px;
-  height: 350px;
   margin-top: 0px;
 }
 .leisure img {
@@ -2780,13 +2777,13 @@ body {
   margin: -5px 10px 5px 0;
 }
 .leisure .intro {
-  margin: -8px 10px 5px 0;
   width: 100%;
 }
 .leisure .intro ul {
   list-style: none;
-  margin-left: 0;
+  margin-left: -10px;
   margin-top: -40px;
+  margin-bottom: -40px;
   min-height: 188px;
 }
 .leisure .intro ul li {
