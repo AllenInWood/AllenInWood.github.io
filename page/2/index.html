@@ -271,6 +271,152 @@
             
               
                 
+                <a class="post-title-link" href="/2017/03/18/The-difference-between-applicationContext-xml-in-Spring-and-xxx-servlet-xml-in-SpringMVC/" itemprop="url">
+                  The difference between applicationContext.xml in Spring and xxx-servlet.xml in SpringMVC
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-03-18T19:31:45-07:00" content="2017-03-18">
+              2017-03-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/18/The-difference-between-applicationContext-xml-in-Spring-and-xxx-servlet-xml-in-SpringMVC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/03/18/The-difference-between-applicationContext-xml-in-Spring-and-xxx-servlet-xml-in-SpringMVC/" itemprop="commentsCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/18/The-difference-between-applicationContext-xml-in-Spring-and-xxx-servlet-xml-in-SpringMVC/" class="leancloud_visitors" data-flag-title="The difference between applicationContext.xml in Spring and xxx-servlet.xml in SpringMVC">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直搞不明白两者的区别。<br>如果使用了SpringMVC，事实上，bean的配置完全可以在xxx-servlet.xml中进行配置。为什么需要applicationContext.xml？一定必须？</p>
+<h1 id="First"><a href="#First" class="headerlink" title="First"></a>First</h1><p>因为直接使用了SpringMVC，所以之前一直不明白xxx-servlet.xml和applicationContext.xml是如何区别的，其实如果直接使用SpringMVC是可以不添加applicationContext.xml文件的。<br>使用applicationContext.xml文件时是需要在web.xml中添加listener的：</p>
+<pre><code class="bash">&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<p>而这个一般是采用非spring mvc架构，如使用struts之类而又想引入spring才添加的，这个是用来加载Application Context。<br>如果直接采用SpringMVC，只需要把所有相关配置放到xxx-servlet.xml中就OK了。</p>
+<h1 id="Second"><a href="#Second" class="headerlink" title="Second"></a>Second</h1><p>Spring lets you define multiple contexts in a parent-child hierarchy.</p>
+<p>The applicationContext.xml defines the beans for the “root webapp context”, i.e. the context associated with the webapp.</p>
+<p>The spring-servlet.xml (or whatever else you call it) defines the beans for one servlet’s app context. There can be many of these in a webapp, one per Spring servlet (e.g. spring1-servlet.xml for servlet spring1, spring2-servlet.xml for servlet spring2).</p>
+<p>Beans in spring-servlet.xml can reference beans in applicationContext.xml, but not vice versa.</p>
+<p>All Spring MVC controllers must go in the spring-servlet.xml context.</p>
+<p>In most simple cases, the applicationContext.xml context is unnecessary. It is generally used to contain beans that are shared between all servlets in a webapp. If you only have one servlet, then there’s not really much point, unless you have a specific use for it.</p>
+<p>More info: <a href="http://blog.csdn.net/zh521zh/article/details/44920415" target="_blank" rel="external">Source link</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+	
+	<! -- 添加微信图标 -->
+    
+	
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/10/Difference-between-redirection-and-forward-in-Java/" itemprop="url">
                   Difference between redirection and forward in Java
                 </a>
@@ -795,143 +941,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/17/generate-Error/" itemprop="url">
-                  generate Error
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-11-17T10:22:52-08:00" content="2016-11-17">
-              2016-11-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/17/generate-Error/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2016/11/17/generate-Error/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/17/generate-Error/" class="leancloud_visitors" data-flag-title="generate Error">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>Python version:</strong> 2.7<br><strong>nltk version:</strong> NLTK3.0.4<br>In version 3.0.4 of NLTK, there is an error when using the below code.</p>
-<pre><code>text3.generate()
-</code></pre><p>After some searching, it is the version difference that contributes to this error.<br>In nltk 2.0.1, text has <em>generate()</em> this function. Just like below img:<br><img src="http://img.blog.csdn.net/20150809134806815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="version difference"><br><em>text.py</em> file in <em>..\Python\nltk-3.2.1\nltk</em> do not have <em>generate()</em> this attribute</p>
-<p><strong>Solution:</strong> Change version</p>
-<p>reference: <em><a href="http://blog.csdn.net/huludan/article/details/47375357" target="_blank" rel="external">http://blog.csdn.net/huludan/article/details/47375357</a></em></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -996,7 +1005,7 @@ s.setAttribute('data-timestamp', +new Date());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1013,7 +1022,7 @@ s.setAttribute('data-timestamp', +new Date());
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
