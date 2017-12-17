@@ -271,6 +271,146 @@
             
               
                 
+                <a class="post-title-link" href="/2017/12/16/PriorityQueue-in-Java/" itemprop="url">
+                  PriorityQueue in Java
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-12-16T16:03:00-08:00" content="2017-12-16">
+              2017-12-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/16/PriorityQueue-in-Java/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/12/16/PriorityQueue-in-Java/" itemprop="commentsCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/12/16/PriorityQueue-in-Java/" class="leancloud_visitors" data-flag-title="PriorityQueue in Java">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>An unbounded priority queue based on a priority heap. The elements of the priority queue are ordered according to their natural ordering (Default), or by a Comparator provided at queue construction time, depending on which constructor is used. If multiple elements are tied for least value, the head is one of those elements – ties are broken arbitrarily.<br>The queue retrieval operations poll, remove, peek, and element access the element at the head of the queue.<br>If you need ordered traversal, consider using Arrays.sort(pq.toArray()).</p>
+</blockquote>
+<h2 id="Fields"><a href="#Fields" class="headerlink" title="Fields"></a>Fields</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//initialize default capacity </span><br><span class="line">private static final int DEFAULT_INITIAL_CAPACITY = 11;  </span><br><span class="line">//heap</span><br><span class="line">private transient Object[] queue;  </span><br><span class="line">//current capacity  </span><br><span class="line">private int size = 0;  </span><br><span class="line">//comparator</span><br><span class="line">private final Comparator&lt;? super E&gt; comparator;  </span><br><span class="line">//modify <span class="built_in">times</span></span><br><span class="line">private transient int modCount = 0;</span><br></pre></td></tr></table></figure>
+<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//add</span><br><span class="line">public boolean add(E e)   </span><br><span class="line">//get the peek element(not delete)</span><br><span class="line">public E peek()  </span><br><span class="line">//poll the top element(delete)  </span><br><span class="line">public E poll()  </span><br><span class="line">//delete</span><br><span class="line">public boolean remove(Object o)  </span><br><span class="line">//<span class="keyword">if</span> contains certain element</span><br><span class="line">public boolean contains(Object o)  </span><br><span class="line">//clear </span><br><span class="line">public void clear()  </span><br><span class="line">//grow capacity</span><br><span class="line">private void grow(int minCapacity)  </span><br><span class="line">//index of</span><br><span class="line">private int indexOf(Object o)</span><br></pre></td></tr></table></figure>
+<h2 id="Constructors"><a href="#Constructors" class="headerlink" title="Constructors"></a>Constructors</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue()</span><br><span class="line">Creates a PriorityQueue with the default initial capacity (11) that orders its elements according to their natural ordering.</span><br><span class="line">PriorityQueue(Collection&lt;? extends E&gt; c)</span><br><span class="line">Creates a PriorityQueue containing the elements <span class="keyword">in</span> the specified collection.</span><br><span class="line">PriorityQueue(int initialCapacity)</span><br><span class="line">Creates a PriorityQueue with the specified initial capacity that orders its elements according to their natural ordering.</span><br><span class="line">PriorityQueue(int initialCapacity, Comparator&lt;? super E&gt; comparator)</span><br><span class="line">Creates a PriorityQueue with the specified initial capacity that orders its elements according to the specified comparator.</span><br><span class="line">PriorityQueue(PriorityQueue&lt;? extends E&gt; c)</span><br><span class="line">Creates a PriorityQueue containing the elements <span class="keyword">in</span> the specified priority queue.</span><br><span class="line">PriorityQueue(SortedSet&lt;? extends E&gt; c)</span><br><span class="line">Creates a PriorityQueue containing the elements <span class="keyword">in</span> the specified sorted <span class="built_in">set</span>.</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/16/PriorityQueue-in-Java/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+	
+	<! -- 添加微信图标 -->
+    
+	
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/12/01/The-principle-of-Java-TreeMap/" itemprop="url">
                   The principle of Java TreeMap
                 </a>
@@ -833,147 +973,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/08/堆中i结点的子树大小至多为2n-3的证明/" itemprop="url">
-                  堆中i结点的子树大小至多为2n/3的证明
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-07-08T18:30:59-07:00" content="2017-07-08">
-              2017-07-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/07/08/堆中i结点的子树大小至多为2n-3的证明/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/07/08/堆中i结点的子树大小至多为2n-3的证明/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/07/08/堆中i结点的子树大小至多为2n-3的证明/" class="leancloud_visitors" data-flag-title="堆中i结点的子树大小至多为2n/3的证明">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>完全树的结点数n = 2^h - 1</strong><br><strong>亦有 结点数n = 2*底层结点数 - 1</strong><br><strong>注：底层结点数x = 2^(h - 1)</strong></p>
-<h2 id="堆中i结点的子树大小至多为2n-3的证明"><a href="#堆中i结点的子树大小至多为2n-3的证明" class="headerlink" title="堆中i结点的子树大小至多为2n/3的证明"></a>堆中i结点的子树大小至多为2n/3的证明</h2><h3 id="问题：在任一含n个元素的堆中，至多有ceiling-n-2-h-1-个高度为h的节点。"><a href="#问题：在任一含n个元素的堆中，至多有ceiling-n-2-h-1-个高度为h的节点。" class="headerlink" title="问题：在任一含n个元素的堆中，至多有ceiling(n/(2^(h+1)))个高度为h的节点。"></a>问题：在任一含n个元素的堆中，至多有ceiling(n/(2^(h+1)))个高度为h的节点。</h3>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/08/堆中i结点的子树大小至多为2n-3的证明/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1033,7 +1037,7 @@ s.setAttribute('data-timestamp', +new Date());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1050,7 +1054,7 @@ s.setAttribute('data-timestamp', +new Date());
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
