@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hello, future" />
+  <meta name="keywords" content="Java,HashMap," />
 
 
 
@@ -84,16 +84,18 @@
 
 
 
-<meta name="description" content="imagination">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AllenInWood&#39;s Blog">
-<meta property="og:url" content="https://alleninwood.github.io/index.html">
+<meta name="description" content="Definition and Characteristics Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key. (The Has">
+<meta name="keywords" content="Java,HashMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap Internal Principle and Implementation">
+<meta property="og:url" content="https://alleninwood.github.io/2018/03/07/HashMap-Internal-Principle-and-Implementation/index.html">
 <meta property="og:site_name" content="AllenInWood&#39;s Blog">
-<meta property="og:description" content="imagination">
+<meta property="og:description" content="Definition and Characteristics Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key. (The Has">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-03-08T02:47:06.423Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AllenInWood&#39;s Blog">
-<meta name="twitter:description" content="imagination">
+<meta name="twitter:title" content="HashMap Internal Principle and Implementation">
+<meta name="twitter:description" content="Definition and Characteristics Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key. (The Has">
 
 
 
@@ -114,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="https://alleninwood.github.io/"/>
+  <link rel="canonical" href="https://alleninwood.github.io/2018/03/07/HashMap-Internal-Principle-and-Implementation/"/>
 
 
-  <title> AllenInWood's Blog </title>
+  <title> HashMap Internal Principle and Implementation | AllenInWood's Blog </title>
 </head>
 <script type="text/javascript">
     var host = "https://alleninwood.github.io/";
@@ -143,9 +145,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -248,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -270,10 +270,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2018/03/07/HashMap-Internal-Principle-and-Implementation/" itemprop="url">
-                  HashMap Internal Principle and Implementation
-                </a>
+                HashMap Internal Principle and Implementation
               
             
           </h1>
@@ -348,9 +345,7 @@
       
 
       
-        
-          
-            <h2 id="Definition-and-Characteristics"><a href="#Definition-and-Characteristics" class="headerlink" title="Definition and Characteristics"></a><strong>Definition and Characteristics</strong></h2><blockquote>
+        <h2 id="Definition-and-Characteristics"><a href="#Definition-and-Characteristics" class="headerlink" title="Definition and Characteristics"></a><strong>Definition and Characteristics</strong></h2><blockquote>
 <p>Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key. (The HashMap class is roughly equivalent to Hashtable, except that it is unsynchronized and permits nulls.) This class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time.</p>
 </blockquote>
 <p>which is:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. HashMap class is based on Map interface.</span><br><span class="line">2. The keys or values <span class="keyword">in</span> it are all allowed to be null.</span><br><span class="line">3. It is unsynchronized.</span><br><span class="line">4. No guarantees <span class="keyword">for</span> entry order and it<span class="string">'s consistency.</span></span><br></pre></td></tr></table></figure></p>
@@ -376,16 +371,25 @@
 <p>The implementation of Resize Function:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">final Node&lt;K,V&gt;[] <span class="function"><span class="title">resize</span></span>() &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">    int oldCap = (oldTab == null) ? 0 : oldTab.length;</span><br><span class="line">    int oldThr = threshold;</span><br><span class="line">    int newCap, newThr = 0;</span><br><span class="line">    <span class="keyword">if</span> (oldCap &gt; 0) &#123;</span><br><span class="line">    	// no resize again when larger than MAXIMUM_CAPACITY</span><br><span class="line">        <span class="keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">            threshold = Integer.MAX_VALUE;</span><br><span class="line">            <span class="built_in">return</span> oldTab;</span><br><span class="line">        &#125;</span><br><span class="line">        // double the size when less than MAXIMUM_CAPACITY</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                 oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">            newThr = oldThr &lt;&lt; 1; // double threshold</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (oldThr &gt; 0) // initial capacity was placed <span class="keyword">in</span> threshold</span><br><span class="line">        newCap = oldThr;</span><br><span class="line">    <span class="keyword">else</span> &#123;               // zero initial threshold signifies using defaults</span><br><span class="line">        newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">    &#125;</span><br><span class="line">    // calculate the new upper threshold <span class="keyword">for</span> resizing</span><br><span class="line">    <span class="keyword">if</span> (newThr == 0) &#123;</span><br><span class="line">        <span class="built_in">float</span> ft = (<span class="built_in">float</span>)newCap * loadFactor;</span><br><span class="line">        newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="built_in">float</span>)MAXIMUM_CAPACITY ?</span><br><span class="line">                  (int)ft : Integer.MAX_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    threshold = newThr;</span><br><span class="line">    @SuppressWarnings(&#123;<span class="string">"rawtypes"</span>,<span class="string">"unchecked"</span>&#125;)</span><br><span class="line">        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];</span><br><span class="line">    table = newTab;</span><br><span class="line">    <span class="keyword">if</span> (oldTab != null) &#123;</span><br><span class="line">    	// move each bucket into new buckets</span><br><span class="line">        <span class="keyword">for</span> (int j = 0; j &lt; oldCap; ++j) &#123;</span><br><span class="line">            Node&lt;K,V&gt; e;</span><br><span class="line">            <span class="keyword">if</span> ((e = oldTab[j]) != null) &#123;</span><br><span class="line">                oldTab[j] = null;</span><br><span class="line">                <span class="keyword">if</span> (e.next == null)</span><br><span class="line">                    newTab[e.hash &amp; (newCap - 1)] = e;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (e instanceof TreeNode)</span><br><span class="line">                    ((TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);</span><br><span class="line">                <span class="keyword">else</span> &#123; // preserve order</span><br><span class="line">                    Node&lt;K,V&gt; loHead = null, loTail = null;</span><br><span class="line">                    Node&lt;K,V&gt; hiHead = null, hiTail = null;</span><br><span class="line">                    Node&lt;K,V&gt; next;</span><br><span class="line">                    <span class="keyword">do</span> &#123;</span><br><span class="line">                        next = e.next;</span><br><span class="line">                        // original index</span><br><span class="line">                        <span class="keyword">if</span> ((e.hash &amp; oldCap) == 0) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (loTail == null)</span><br><span class="line">                                loHead = e;</span><br><span class="line">                            <span class="keyword">else</span></span><br><span class="line">                                loTail.next = e;</span><br><span class="line">                            loTail = e;</span><br><span class="line">                        &#125;</span><br><span class="line">                        // original index + oldCap</span><br><span class="line">                        <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">if</span> (hiTail == null)</span><br><span class="line">                                hiHead = e;</span><br><span class="line">                            <span class="keyword">else</span></span><br><span class="line">                                hiTail.next = e;</span><br><span class="line">                            hiTail = e;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">while</span> ((e = next) != null);</span><br><span class="line">                    // put the original index into bucket</span><br><span class="line">                    <span class="keyword">if</span> (loTail != null) &#123;</span><br><span class="line">                        loTail.next = null;</span><br><span class="line">                        newTab[j] = loHead;</span><br><span class="line">                    &#125;</span><br><span class="line">                    // put the original index + oldCap into bucket</span><br><span class="line">                    <span class="keyword">if</span> (hiTail != null) &#123;</span><br><span class="line">                        hiTail.next = null;</span><br><span class="line">                        newTab[j + oldCap] = hiHead;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> newTab;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>More info:<br><a href="http://openjdk.java.net/jeps/180" target="_blank" rel="external">Source link</a><br><a href="http://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="external">Source link</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/media.jpeg" alt="AllenInWood wechat" style="width: 200px; max-width: 100%;"/>
+    <div>Allen's wechat public media 疏理</div>
+</div>
+
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
@@ -395,614 +399,42 @@
     
 	
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/16/PriorityQueue-in-Java/" itemprop="url">
-                  PriorityQueue in Java
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-16T16:03:00-08:00" content="2017-12-16">
-              2017-12-16
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/16/PriorityQueue-in-Java/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/12/16/PriorityQueue-in-Java/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/12/16/PriorityQueue-in-Java/" class="leancloud_visitors" data-flag-title="PriorityQueue in Java">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/HashMap/" rel="tag">#HashMap</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <blockquote>
-<p>An unbounded priority queue based on a priority heap. The elements of the priority queue are ordered according to their natural ordering (Default), or by a Comparator provided at queue construction time, depending on which constructor is used. If multiple elements are tied for least value, the head is one of those elements – ties are broken arbitrarily.<br>The queue retrieval operations poll, remove, peek, and element access the element at the head of the queue.<br>If you need ordered traversal, consider using Arrays.sort(pq.toArray()).</p>
-</blockquote>
-<h2 id="Fields"><a href="#Fields" class="headerlink" title="Fields"></a>Fields</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//initialize default capacity </span><br><span class="line">private static final int DEFAULT_INITIAL_CAPACITY = 11;  </span><br><span class="line">//heap</span><br><span class="line">private transient Object[] queue;  </span><br><span class="line">//current capacity  </span><br><span class="line">private int size = 0;  </span><br><span class="line">//comparator</span><br><span class="line">private final Comparator&lt;? super E&gt; comparator;  </span><br><span class="line">//modify <span class="built_in">times</span></span><br><span class="line">private transient int modCount = 0;</span><br></pre></td></tr></table></figure>
-<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//add</span><br><span class="line">public boolean add(E e)   </span><br><span class="line">//get the peek element(not delete)</span><br><span class="line">public E peek()  </span><br><span class="line">//poll the top element(delete)  </span><br><span class="line">public E poll()  </span><br><span class="line">//delete</span><br><span class="line">public boolean remove(Object o)  </span><br><span class="line">//<span class="keyword">if</span> contains certain element</span><br><span class="line">public boolean contains(Object o)  </span><br><span class="line">//clear </span><br><span class="line">public void clear()  </span><br><span class="line">//grow capacity</span><br><span class="line">private void grow(int minCapacity)  </span><br><span class="line">//index of</span><br><span class="line">private int indexOf(Object o)</span><br></pre></td></tr></table></figure>
-<h2 id="Constructors"><a href="#Constructors" class="headerlink" title="Constructors"></a>Constructors</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue()</span><br><span class="line">Creates a PriorityQueue with the default initial capacity (11) that orders its elements according to their natural ordering.</span><br><span class="line">PriorityQueue(Collection&lt;? extends E&gt; c)</span><br><span class="line">Creates a PriorityQueue containing the elements <span class="keyword">in</span> the specified collection.</span><br><span class="line">PriorityQueue(int initialCapacity)</span><br><span class="line">Creates a PriorityQueue with the specified initial capacity that orders its elements according to their natural ordering.</span><br><span class="line">PriorityQueue(int initialCapacity, Comparator&lt;? super E&gt; comparator)</span><br><span class="line">Creates a PriorityQueue with the specified initial capacity that orders its elements according to the specified comparator.</span><br><span class="line">PriorityQueue(PriorityQueue&lt;? extends E&gt; c)</span><br><span class="line">Creates a PriorityQueue containing the elements <span class="keyword">in</span> the specified priority queue.</span><br><span class="line">PriorityQueue(SortedSet&lt;? extends E&gt; c)</span><br><span class="line">Creates a PriorityQueue containing the elements <span class="keyword">in</span> the specified sorted <span class="built_in">set</span>.</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/16/PriorityQueue-in-Java/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/16/PriorityQueue-in-Java/" rel="next" title="PriorityQueue in Java">
+                <i class="fa fa-chevron-left"></i> PriorityQueue in Java
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/01/The-principle-of-Java-TreeMap/" itemprop="url">
-                  The principle of Java TreeMap
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-12-01T10:32:12-08:00" content="2017-12-01">
-              2017-12-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/01/The-principle-of-Java-TreeMap/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/12/01/The-principle-of-Java-TreeMap/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/12/01/The-principle-of-Java-TreeMap/" class="leancloud_visitors" data-flag-title="The principle of Java TreeMap">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>TreeMap is a Red-Black tree based NavigableMap implementation. The map is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation time, depending on which constructor is used.<br>This implementation provides guaranteed log(n) time cost for the containsKey, get, put and remove operations. Algorithms are adaptations of those in Cormen, Leiserson, and Rivest’s Introduction to Algorithms.</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/01/The-principle-of-Java-TreeMap/#more" rel="contents">
-              Read more &raquo;
-            </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/21/The-implementation-of-B-tree-printing/" itemprop="url">
-                  The implementation of B+ tree printing
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-21T00:28:39-08:00" content="2017-11-21">
-              2017-11-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/21/The-implementation-of-B-tree-printing/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/11/21/The-implementation-of-B-tree-printing/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/11/21/The-implementation-of-B-tree-printing/" class="leancloud_visitors" data-flag-title="The implementation of B+ tree printing">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="BACKGROUND"><a href="#BACKGROUND" class="headerlink" title="BACKGROUND"></a>BACKGROUND</h2><hr>
-<p>The B+ tree is a kind of Balanced tree which is used to manipulate indexes saving in the relational database system. By using B+ tree, it is faster to retrieve targetted record in the heap file.<br>In this essay, let me introduce the recent implementation of printing B+ tree in one of my current project.</p>
-<p>As usual, B+ has a low level and multiple fanout number, and its non-leaf has a different structure from leaf node. In database lower layer, non-leaf contains multiple keys to search for different leaves. And leaf node contains real key value and RID of record (can be used to get record from heap file).</p>
-<h2 id="Analyse"><a href="#Analyse" class="headerlink" title="Analyse"></a>Analyse</h2><hr>
-<p>In normal situation, B+ tree has a printing structure as below:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="string">"keys"</span>:[<span class="string">"P"</span>],</span><br><span class="line"><span class="string">"children"</span>:[</span><br><span class="line">    &#123;<span class="string">"keys"</span>:[<span class="string">"C"</span>,<span class="string">"G"</span>,<span class="string">"M"</span>],</span><br><span class="line">     <span class="string">"children"</span>: [</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"A:[(1,1),(1,2)]"</span>,<span class="string">"B:[(2,1),(2,2)]"</span>]&#125;,</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"D:[(3,1),(3,2)]"</span>,<span class="string">"E:[(4,1)]"</span>,<span class="string">"F:[(5,1)]"</span>]&#125;,</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"J:[(5,1),(5,2)]"</span>,<span class="string">"K:[(6,1),(6,2)]"</span>,<span class="string">"L:[(7,1)]"</span>]&#125;,</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"N:[(8,1)]"</span>,<span class="string">"O:[(9,1)]"</span>]&#125;</span><br><span class="line">    ]&#125;,</span><br><span class="line">    &#123;<span class="string">"keys"</span>:[<span class="string">"T"</span>,<span class="string">"X"</span>],</span><br><span class="line">     <span class="string">"children"</span>: [</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"Q:[(10,1)]"</span>,<span class="string">"R:[(11,1)]"</span>,<span class="string">"S:[(12,1)]"</span>]&#125;,</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"U:[(13,1)]"</span>,<span class="string">"V:[(14,1)]"</span>]&#125;,</span><br><span class="line">        &#123;<span class="string">"keys"</span>: [<span class="string">"Y:[(15,1)]"</span>,<span class="string">"Z:[(16,1)]"</span>]&#125;</span><br><span class="line">    ]&#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Its tree-formatted structure is like below</p>
-<p><img src="/images/tree3.svg" alt=""></p>
-<p>We could see from what we mentioned, the non-leaf of B+ tree has “keys” and “children”, but the leaf only has “keys”.<br>So the printing of leaf and non-leaf is different, we could use different situation in our BFS Algorithm.<br>Further, The end of each printing component doesn’t have ‘,’. About this problem, we print the first one in the beginning, then print “,” + left one iteratively.</p>
-<p>In a corner case, only one leaf node and each entry has same key value, i. e. if leaf entries contain duplicate values, there’s no duplicate key printing anymore, and the RID of it should be in the same quotation marks of former one’s. I designed a way to avoid this problem : remember the former keys when handling leaves, and forget them in the suitable time.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/21/The-implementation-of-B-tree-printing/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/11/Springboot-Restful-API-summary/" itemprop="url">
-                  Springboot Restful API summary
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-11T09:06:19-08:00" content="2017-11-11">
-              2017-11-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/11/Springboot-Restful-API-summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/11/11/Springboot-Restful-API-summary/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/11/11/Springboot-Restful-API-summary/" class="leancloud_visitors" data-flag-title="Springboot Restful API summary">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th style="text-align:center">Request type</th>
-<th style="text-align:center">URL</th>
-<th style="text-align:center">Function</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">GET</td>
-<td style="text-align:center">/users</td>
-<td style="text-align:center">get list of users</td>
-</tr>
-<tr>
-<td style="text-align:center">POST</td>
-<td style="text-align:center">/users</td>
-<td style="text-align:center">create a user</td>
-</tr>
-<tr>
-<td style="text-align:center">GET</td>
-<td style="text-align:center">/users/id</td>
-<td style="text-align:center">find user by id</td>
-</tr>
-<tr>
-<td style="text-align:center">PUT</td>
-<td style="text-align:center">/users/id</td>
-<td style="text-align:center">update user by id</td>
-</tr>
-<tr>
-<td style="text-align:center">DELETE</td>
-<td style="text-align:center">/users/id</td>
-<td style="text-align:center">delete user by id</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
@@ -1048,8 +480,17 @@ s.setAttribute('data-timestamp', +new Date());
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpeg"
@@ -1110,6 +551,17 @@ s.setAttribute('data-timestamp', +new Date());
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-and-Characteristics"><span class="nav-number">1.</span> <span class="nav-text">Definition and Characteristics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internal-Implementations"><span class="nav-number">2.</span> <span class="nav-text">Internal Implementations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#put-function"><span class="nav-number">2.1.</span> <span class="nav-text">put function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-function"><span class="nav-number">2.2.</span> <span class="nav-text">get function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#calculate-the-hashcode"><span class="nav-number">2.3.</span> <span class="nav-text">calculate the hashcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resize-function"><span class="nav-number">2.4.</span> <span class="nav-text">resize function</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1213,6 +665,10 @@ s.setAttribute('data-timestamp', +new Date());
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
@@ -1229,9 +685,9 @@ s.setAttribute('data-timestamp', +new Date());
 
     <script type="text/javascript">
       var disqus_shortname = 'allen's blog';
-      var disqus_identifier = 'index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2018/03/07/HashMap-Internal-Principle-and-Implementation/';
+      var disqus_title = "HashMap Internal Principle and Implementation";
+      var disqus_url = 'https://alleninwood.github.io/2018/03/07/HashMap-Internal-Principle-and-Implementation/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -1242,6 +698,13 @@ s.setAttribute('data-timestamp', +new Date());
       }
 
       run_disqus_script('count.js');
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
       
     </script>
   
