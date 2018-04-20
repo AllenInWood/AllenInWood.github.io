@@ -271,6 +271,145 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/19/CAP-theory-practical-analysis/" itemprop="url">
+                  CAP theory practical analysis
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-04-19T21:12:48-07:00" content="2018-04-19">
+              2018-04-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/19/CAP-theory-practical-analysis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2018/04/19/CAP-theory-practical-analysis/" itemprop="commentsCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/19/CAP-theory-practical-analysis/" class="leancloud_visitors" data-flag-title="CAP theory practical analysis">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Background"><a href="#Background" class="headerlink" title="Background:"></a>Background:</h2><p>For very important data, data redundancy needs to be performed during system deployment. That is, multiple copies of these data should be saved. Usually, we store each data backup on multiple nodes for storage using a distributed system.<br>One of my previous projects was a website system called <a href="https://github.com/AllenInWood/CatSneeze" target="_blank" rel="external">CatSneeze</a> for finding and selling online movies, which used this architecture:<br><img src="/images/structure.png" alt=""><br>Among them, a load balancer in google cloud is roled by a Apache server, and I use a round-robin fashion for polling. Requests sent from the front end are forwarded to two machines loaded on AWS EC2 in turn. By this method, the burden of access is reduced and the sustainable number of service users is increased.<br>MySQLs on two AWSs is deployed in a Master-Slave mode, in which the Master can perform all write operations and partial read operations while the Slave performs partial read operations. Data redundancy is performed on instances2 and instance3. Among them, data replication from master to slave can keep the two databases synchronized at any time.</p>
+<h2 id="Weakness"><a href="#Weakness" class="headerlink" title="Weakness"></a>Weakness</h2><p>Occasionally, the node is not available due to network reasons or the internal causes of instance 2 or 3.<br>When the user accesses instance2, a piece of data is written. However, if instance2 crashes and leaves the network currently, this will lead to two troubles:<br>1) The load balancer cannot find instance2. If it thinks it deads, it will forward the user’s next visit to instance3.<br>2) The data cannot find instance2, so the data that user just written cannot be copied to instance3, causing the instance3‘data oringinal.</p>
+<h2 id="CAP-Theory"><a href="#CAP-Theory" class="headerlink" title="CAP Theory"></a>CAP Theory</h2><p>If we choose this: because instance3 can also serve. Small fraction of data’s asynchronization in instance3 does not affect the overall situation. When instance2 is pulled back to the network, data replication can be restarted again.<br>At this time, we chose Availability (A) to ensure that the system can provide services. Data inconsistency can be tolerated.</p>
+<p>If we choose: Data synchronization is extremely important. If the data is inconsistent it will have serious consequences. So when instance2 deads, those data related functions in instance3 must also stop. You must wait for instance2 to return to the network before the slave machine can be restarted and data synchronization can resume.<br>At this time, we put Consistency (C) in the first place.</p>
+<p>Therefore, in the case where the network nodes cannot communicate with each other and the functions related to data replication, we either choose availability (A) or choose consistency (C), and we cannot select both at the same time.<br>In fact, there is another feature hidden behind these two choices. In the case where network nodes cannot communicate with each other, nodes are isolated and network partitions are created, but the entire system can still work. This feature we call it: Partition tolerance (P).</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This is also a practical interpretation of the famous CAP theory: In a distributed computer system, the three guarantees of consistency (C), availability (A), and partition fault tolerance (P) cannot be satisfied at the same time, up to two.</p>
+<p>More info:<br><a href="https://blog.csdn.net/wufaliang003/article/details/79342371" target="_blank" rel="external">CAP定理与Base理论</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+	
+	<! -- 添加微信图标 -->
+    
+	
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/03/07/HashMap-Internal-Principle-and-Implementation/" itemprop="url">
                   HashMap Internal Principle and Implementation
                 </a>
@@ -809,174 +948,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/11/Springboot-Restful-API-summary/" itemprop="url">
-                  Springboot Restful API summary
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-11-11T09:06:19-08:00" content="2017-11-11">
-              2017-11-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/11/Springboot-Restful-API-summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="https://alleninwood.github.io/2017/11/11/Springboot-Restful-API-summary/" itemprop="commentsCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/11/11/Springboot-Restful-API-summary/" class="leancloud_visitors" data-flag-title="Springboot Restful API summary">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">visitors </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th style="text-align:center">Request type</th>
-<th style="text-align:center">URL</th>
-<th style="text-align:center">Function</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">GET</td>
-<td style="text-align:center">/users</td>
-<td style="text-align:center">get list of users</td>
-</tr>
-<tr>
-<td style="text-align:center">POST</td>
-<td style="text-align:center">/users</td>
-<td style="text-align:center">create a user</td>
-</tr>
-<tr>
-<td style="text-align:center">GET</td>
-<td style="text-align:center">/users/id</td>
-<td style="text-align:center">find user by id</td>
-</tr>
-<tr>
-<td style="text-align:center">PUT</td>
-<td style="text-align:center">/users/id</td>
-<td style="text-align:center">update user by id</td>
-</tr>
-<tr>
-<td style="text-align:center">DELETE</td>
-<td style="text-align:center">/users/id</td>
-<td style="text-align:center">delete user by id</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-	
-	<! -- 添加微信图标 -->
-    
-	
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1041,7 +1012,7 @@ s.setAttribute('data-timestamp', +new Date());
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1058,7 +1029,7 @@ s.setAttribute('data-timestamp', +new Date());
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
