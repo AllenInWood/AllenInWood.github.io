@@ -1564,7 +1564,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8ed429;
+  background: #de05ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2753,6 +2753,11 @@ body {
 .img-center {
   max-width: 200px;
   max-height: 1000px;
+  display: block;
+  margin: auto;
+}
+.avator-center {
+  max-width: 80%;
   display: block;
   margin: auto;
 }
